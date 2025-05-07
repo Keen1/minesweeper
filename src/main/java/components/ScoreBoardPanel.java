@@ -13,7 +13,7 @@ public class ScoreBoardPanel extends JPanel{
     int seconds = 0;
 
     public ScoreBoardPanel(){
-
+        initComponents();
     }
 
     private void initComponents(){
