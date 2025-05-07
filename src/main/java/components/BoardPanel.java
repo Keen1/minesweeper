@@ -19,9 +19,9 @@ public class BoardPanel extends JPanel{
     private JButton[][] cellButtons;
 
     public BoardPanel(){
-        this.boardRows = 9;
-        this.boardColumns = 9;
-        this.mineCount = 10;
+        this.boardRows = 30;
+        this.boardColumns = 24;
+        this.mineCount = 40;
         initComponents();
     }
 
@@ -60,9 +60,7 @@ public class BoardPanel extends JPanel{
 
 
     private void initCellButtons(){
-        int row = 9;
-        int col = 9;
-        this.cellButtons = new JButton[row][col];
+        this.cellButtons = new JButton[this.getBoardRows()][this.getBoardColumns()];
         for(int i = 0; i < this.getBoardRows(); i++){
             for(int j = 0; j < this.getBoardColumns(); j++){
                 this.cellButtons[i][j] = new JButton();
