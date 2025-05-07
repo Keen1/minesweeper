@@ -2,11 +2,9 @@ package components;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ScoreBoardPanel extends JPanel{
-    private JLabel minesRemaining;
+    private JLabel minesRemainingLabel;
     private JLabel secondsLabel;
     private JButton gameStatusButton;
 
@@ -20,9 +18,13 @@ public class ScoreBoardPanel extends JPanel{
 
     private void initComponents(){
         setLayout(new FlowLayout(FlowLayout.RIGHT));
+        add(getSecondsLabel());
+        add(getGameStatusButton());
+        add(getMinesRemainingLabel());
     }
 
     private void initTimer(){
+        //TODO: update the action listener here instead of using null
         this.timer = new Timer(1000, null);
     }
     public Timer getTimer(){
@@ -55,14 +57,14 @@ public class ScoreBoardPanel extends JPanel{
 
 
     private void initMinesRemainingLabel(){
-        this.minesRemaining = new JLabel("0");
+        this.minesRemainingLabel = new JLabel("0");
 
     }
     public JLabel getMinesRemainingLabel(){
-        if(this.minesRemaining == null){
+        if(this.minesRemainingLabel == null){
             initMinesRemainingLabel();
         }
-        return this.minesRemaining;
+        return this.minesRemainingLabel;
     }
 
     private void initGameStatusButton(){
