@@ -11,9 +11,7 @@ public class GameModel {
         this.board = board;
     }
 
-    public Board getBoard(){
-        return this.board;
-    }
+
 
     public boolean hasBomb(int row, int col){
         return this.getBoard().getCell(row, col).hasBomb();
@@ -28,7 +26,52 @@ public class GameModel {
         this.getBoard().getCell(row, col).setUserFlag(userFlag);
     }
 
+    public void updateFlaggedCount(){
+        int flagged = this.getFlaggedCount();
+        for(int i = 0; i < this.getBoard().getCells().length; i++){
+            for(int j = 0; j < this.getBoard().getCells()[i].length; j++){
+                if(this.getBoard().getCells()[i][j].hasUserFlag()){
+                    flagged++;
+                }
+            }
+        }
+        this.setFlaggedCount(flagged);
+    }
 
+    public void updateUnflaggedBombCount(){
+        int unflaggedBombs = this.getUnflaggedBombCount();
+        for(int i = 0; i < this.getBoard().getCells().length; i++){
+            for(int j = 0; j < this.getBoard().getCells()[i].length; j++){
+                if(this.getBoard().getCells()[i][j].hasBomb() && !this.getBoard().getCells()[i][j].hasUserFlag()){
+                    unflaggedBombs++;
+                }
+            }
+        }
+        this.setUnflaggedBombCount(unflaggedBombs);
+    }
+
+    public void resetBoard(){
+        int row = this.getBoard().getCells().length;
+        int col = this.getBoard().getCells()[row].length;
+        Cell[][] cells = new Cell[row][col];
+        Board board = new Board();
+        board.setCells(cells);
+        this.setBoard(board);
+    }
+    public void resetBoard(int row, int col){
+        Cell[][] cells = new Cell[row][col];
+        Board board = new Board();
+        board.setCells(cells);
+        this.setBoard(board);
+    }
+
+    public Board getBoard(){
+        return this.board;
+    }
+
+    public void setBoard(Board board){
+        this.board = board;
+    }
 
     public void setFlaggedCount(int flaggedCount){
         this.flaggedCount = flaggedCount;
@@ -48,6 +91,7 @@ public class GameModel {
     public int getUnflaggedBombCount(){
         return this.unflaggedBombCount;
     }
+
 
 
 
