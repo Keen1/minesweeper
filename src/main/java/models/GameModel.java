@@ -1,5 +1,9 @@
 package models;
 
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.List;
+
 //game model class
 //contains the board and some summary stats regarding the game state
 public class GameModel {
@@ -84,29 +88,89 @@ public class GameModel {
         this.setBoard(board);
     }
 
+    //set a given number of bombs on the board given a count
+    public void setBombs(int count){
+
+        //need to generate two random integers, the row value and the column value
+        SecureRandom secureRand = new SecureRandom();
+        int maxRows = this.getBoard().getCells().length;
+        int maxCols = this.getBoard().getCells()[maxRows].length;
+
+        while(count > 0){
+            int randRow = secureRand.nextInt(maxRows);
+            int randCol = secureRand.nextInt(maxCols);
+            if(!this.getBoard().getCell(randRow, randCol).hasBomb()){
+                this.getBoard().getCell(randRow, randCol).setBomb(true);
+                count--;
+            }
+        }
+
+    }
+
+    //determine which cells adjacent to the specified cell have a bomb
+    public int getAdjacentBombsCount(int row, int col){
+
+        int count = 0;
+
+        for(int rowOffset = -1; rowOffset <= 1; rowOffset++){
+            for(int colOffset = -1; colOffset <= 1; colOffset++){
+                if(rowOffset == 0 && colOffset == 0){
+                    continue;
+                }
+
+                int nextRow = rowOffset + row;
+                int nextCol = colOffset + col;
+                if(nextRow >= 0 && nextRow < this.getBoard().getCells().length &&
+                        nextCol >=0 && nextCol < this.getBoard().getCells()[nextRow].length){
+
+                    if(this.getBoard().getCells()[nextRow][nextCol].hasBomb()){
+                        count++;
+                    }
+
+                }
+            }
+        }
+        return count;
+
+
+    }
+
+    //get the game board
     public Board getBoard(){
         return this.board;
     }
 
+    //set the game board
     public void setBoard(Board board){
         this.board = board;
     }
 
+    //set the flagged count
     public void setFlaggedCount(int flaggedCount){
         this.flaggedCount = flaggedCount;
     }
+
+    //get the flagged count
     public int getFlaggedCount(){
         return this.flaggedCount;
     }
+
+    //set the bomb count
     public void setBombCount(int bombCount){
         this.bombCount = bombCount;
     }
+
+    //get the bomb count
     public int getBombCount(){
         return this.bombCount;
     }
+
+    //set number of unflagged bombs
     public void setUnflaggedBombCount(int unflaggedBombCount){
         this.unflaggedBombCount = unflaggedBombCount;
     }
+
+    //get the number of unflagged bombs
     public int getUnflaggedBombCount(){
         return this.unflaggedBombCount;
     }
