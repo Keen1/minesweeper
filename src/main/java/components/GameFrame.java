@@ -78,6 +78,7 @@ public class GameFrame extends JFrame {
         this.difficultyGroup.add(getBeginnerDifficultyMenuItem());
         this.difficultyGroup.add(getIntermediateDifficultyMenuItem());
         this.difficultyGroup.add(getExpertDifficultyMenuItem());
+        this.getBeginnerDifficultyMenuItem().setSelected(true);
     }
 
     public ButtonGroup getDifficultyGroup(){
@@ -124,6 +125,7 @@ public class GameFrame extends JFrame {
         this.difficultySubMenu.add(getBeginnerDifficultyMenuItem());
         this.difficultySubMenu.add(getIntermediateDifficultyMenuItem());
         this.difficultySubMenu.add(getExpertDifficultyMenuItem());
+        initDifficultyGroup();
 
     }
 
