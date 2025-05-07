@@ -6,9 +6,15 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GameFrame extends JFrame {
-    private static final Dimension FRAME_DIM = new Dimension(400, 300);
+    private static final Dimension FRAME_DIM = new Dimension(250, 300);
+    private static final Dimension NINE_BY_NINE_DIM = new Dimension(250,300);
+    private static final int DEFAULT_BOARD_ROWS = 9;
+    private static final int DEFAULT_BOARD_COLUMNS = 9;
+    private static final int DEFUALT_MINE_COUNT = 10;
+
     private  ScoreBoardPanel scoreBoardPanel;
     private  BoardPanel boardPanel;
+
     public GameFrame(){
         initComponents();
 

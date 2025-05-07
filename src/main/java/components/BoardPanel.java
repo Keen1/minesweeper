@@ -4,15 +4,28 @@ import javax.swing.*;
 import java.awt.*;
 
 public class BoardPanel extends JPanel{
+    private static final Dimension CELL_DIM = new Dimension(25,25);
+    private int boardRows;
+    private int boardColumns;
+    private int mineCount;
 
     private JButton[][] cellButtons;
 
     public BoardPanel(){
+        this.boardRows = 9;
+        this.boardColumns = 9;
+        this.mineCount = 10;
         initComponents();
     }
-    public BoardPanel(JButton[][] cellButtons){
-        this.cellButtons = cellButtons;
+
+    public BoardPanel(int boardRows, int boardColumns, int mineCount){
+        this.boardRows = boardRows;
+        this.boardColumns = boardColumns;
+        this.mineCount = mineCount;
+        initComponents();
     }
+
+
 
 
     private void initComponents(){
@@ -34,13 +47,19 @@ public class BoardPanel extends JPanel{
 
 
 
+
+
+
     private void initCellButtons(){
         int row = 9;
         int col = 9;
         this.cellButtons = new JButton[row][col];
-        for(int i = 0; i < row; i++){
-            for(int j = 0; j < col; j++){
-                this.cellButtons[i][j] = new JButton("x");
+        for(int i = 0; i < this.getBoardRows(); i++){
+            for(int j = 0; j < this.getBoardColumns(); j++){
+                this.cellButtons[i][j] = new JButton();
+                this.cellButtons[i][j].setPreferredSize(CELL_DIM);
+                this.cellButtons[i][j].setMinimumSize(CELL_DIM);
+
             }
         }
     }
@@ -52,6 +71,28 @@ public class BoardPanel extends JPanel{
         }
 
         return this.cellButtons;
+    }
+
+    public void setMineCount(int mineCount){
+        this.mineCount = mineCount;
+    }
+    public void setBoardRows(int boardRows){
+        this.boardRows = boardRows;
+    }
+    public void setBoardColumns(int boardColumns){
+        this.boardColumns = boardColumns;
+    }
+
+    public int getMineCount(){
+        return this.mineCount;
+    }
+
+    public int getBoardRows(){
+        return this.boardRows;
+    }
+
+    public int getBoardColumns(){
+        return this.boardColumns;
     }
 
 
