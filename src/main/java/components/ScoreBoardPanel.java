@@ -17,10 +17,14 @@ public class ScoreBoardPanel extends JPanel{
     }
 
     private void initComponents(){
+
         setLayout(new FlowLayout(FlowLayout.RIGHT));
         add(getSecondsLabel());
         add(getGameStatusButton());
         add(getMinesRemainingLabel());
+
+        setVisible(true);
+
     }
 
     private void initTimer(){
