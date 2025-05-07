@@ -49,7 +49,7 @@ public class GameModel {
     }
 
     //determine which cells adjacent to the specified cell have a bomb
-    public int getAdjacentBombsCount(int row, int col){
+    public int getAdjacentMinesCount(int row, int col){
 
         int count = 0;
 
@@ -139,8 +139,8 @@ public class GameModel {
         return this.getBoard().getCell(row, col).hasUserFlag();
     }
 
-    //set the bomb status of a particular cell
-    public void setBomb(int row, int col, boolean bomb){
+    //set the mine status of a particular cell
+    public void setMine(int row, int col, boolean bomb){
         this.getBoard().getCell(row, col).setMine(bomb);
     }
 
@@ -169,12 +169,12 @@ public class GameModel {
         return this.flaggedCount;
     }
 
-    //set the bomb count
+    //set the mine count
     public void setMineCount(int mineCount){
         this.mineCount = mineCount;
     }
 
-    //get the bomb count
+    //get the mine count
     public int getMineCount(){
         return this.mineCount;
     }
@@ -184,7 +184,7 @@ public class GameModel {
         this.unflaggedMineCount = unflaggedBombCount;
     }
 
-    //get the number of unflagged bombs
+    //get the number of unflagged mines
     public int getUnflaggedMineCount(){
         return this.unflaggedMineCount;
     }

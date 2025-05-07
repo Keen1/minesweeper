@@ -32,6 +32,10 @@ public class GameController {
         registerCellMouseHandlers();
     }
 
+    public void setDifficulty(int row, int col, int mineCount){
+        this.getGameModel().resetBoard(row, col);
+    }
+
     public void registerCellMouseHandlers(){
         JButton statusButton = this.getScoreBoardPanel().getGameStatusButton();
         JButton[][] cellButtons = this.getBoardPanel().getCellButtons();
