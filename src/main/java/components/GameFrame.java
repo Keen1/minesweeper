@@ -12,6 +12,12 @@ public class GameFrame extends JFrame {
     private static final int DEFAULT_BOARD_ROWS = 9;
     private static final int DEFAULT_BOARD_COLUMNS = 9;
     private static final int DEFUALT_MINE_COUNT = 10;
+    private static final int INTERMEDIATE_BOARD_ROWS = 16;
+    private static final int INTERMEDIATE_BOARD_COLUMNS = 16;
+    private static final int INTERMEDIATE_MINE_COUNT = 40;
+    private static final int EXPERT_BOARD_ROWS = 30;
+    private static final int EXPERT_BOARD_COLUMMNS = 16;
+    private static final int EXPERT_BOARD_MINE_COUNT = 99;
 
     private  ScoreBoardPanel scoreBoardPanel;
     private  BoardPanel boardPanel;
