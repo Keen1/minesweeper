@@ -17,6 +17,13 @@ public class GameController {
     public GameController(){
 
     }
+
+    public GameController(GameFrame gameFrame, BoardPanel boardPanel, ScoreBoardPanel scoreBoardPanel){
+        this.gameFrame = gameFrame;
+        this.boardPanel = boardPanel;
+        this.scoreBoardPanel = scoreBoardPanel;
+
+    }
     public GameController(GameFrame gameFrame, BoardPanel boardPanel, ScoreBoardPanel scoreBoardPanel, GameModel gameModel){
         this.gameFrame = gameFrame;
         this.boardPanel = boardPanel;

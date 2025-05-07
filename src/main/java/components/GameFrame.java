@@ -7,8 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GameFrame extends JFrame {
-    private static final Dimension FRAME_DIM = new Dimension(250, 350);
-    private static final Dimension NINE_BY_NINE_DIM = new Dimension(250,300);
+    private static final Dimension FRAME_DIM = new Dimension(250, 375);
+    private static final Dimension NINE_BY_NINE_DIM = new Dimension(250,375);
     private static final int DEFAULT_BOARD_ROWS = 9;
     private static final int DEFAULT_BOARD_COLUMNS = 9;
     private static final int DEFUALT_MINE_COUNT = 10;
@@ -17,6 +17,13 @@ public class GameFrame extends JFrame {
     private  BoardPanel boardPanel;
     private GameController gameController;
     private GameModel gameModel;
+    private JMenuBar menuBar;
+    private JMenu settingsMenu;
+    private JMenu difficultySubMenu;
+    private JCheckBoxMenuItem beginnerDifficultyMenuItem;
+    private JCheckBoxMenuItem intermediateDifficultyMenuItem;
+    private JCheckBoxMenuItem expertDifficultyMenuItem;
+
 
     public GameFrame(){
         initComponents();
@@ -30,6 +37,7 @@ public class GameFrame extends JFrame {
         initFrameAttributes();
         add(getScoreBoardPanel(), BorderLayout.NORTH);
         add(getBoardPanel(), BorderLayout.CENTER);
+        setJMenuBar(getMenus());
         pack();
 
     }
@@ -64,6 +72,74 @@ public class GameFrame extends JFrame {
         setLayout(new BorderLayout());
     }
 
+    private void initExpertDifficultyMenuItem(){
+        this.expertDifficultyMenuItem = new JCheckBoxMenuItem("expert");
+    }
+    public JCheckBoxMenuItem getExpertDifficultyMenuItem(){
+        if(this.expertDifficultyMenuItem == null){
+            initExpertDifficultyMenuItem();
+        }
+        return this.expertDifficultyMenuItem;
+    }
+
+    private void initIntermediateDifficultyMenuItem(){
+        this.intermediateDifficultyMenuItem = new JCheckBoxMenuItem("intermediate");
+    }
+    public JCheckBoxMenuItem getIntermediateDifficultyMenuItem(){
+        if(this.intermediateDifficultyMenuItem == null){
+            initIntermediateDifficultyMenuItem();
+        }
+        return this.intermediateDifficultyMenuItem;
+    }
+
+    private void initBeginnerDifficultyMenuItem(){
+        this.beginnerDifficultyMenuItem = new JCheckBoxMenuItem("beginner");
+
+    }
+    public JCheckBoxMenuItem getBeginnerDifficultyMenuItem(){
+        if(this.beginnerDifficultyMenuItem == null){
+            initBeginnerDifficultyMenuItem();
+        }
+        return this.beginnerDifficultyMenuItem;
+    }
+    private void initDifficultyMenu(){
+
+        this.difficultySubMenu = new JMenu("difficulty");
+
+        this.difficultySubMenu.add(getBeginnerDifficultyMenuItem());
+        this.difficultySubMenu.add(getIntermediateDifficultyMenuItem());
+        this.difficultySubMenu.add(getExpertDifficultyMenuItem());
+
+    }
+
+    public JMenu getDifficultyMenu(){
+        if(this.difficultySubMenu == null){
+            initDifficultyMenu();
+        }
+        return this.difficultySubMenu;
+    }
+
+    private void initSettingsMenu(){
+        this.settingsMenu = new JMenu("settings");
+        this.settingsMenu.add(getDifficultyMenu());
+    }
+    public JMenu getSettingsMenu(){
+        if(this.settingsMenu == null){
+            initSettingsMenu();
+        }
+        return this.settingsMenu;
+    }
+
+    private void initMenuBar(){
+        this.menuBar = new JMenuBar();
+        this.menuBar.add(getSettingsMenu());
+    }
+    public JMenuBar getMenus(){
+        if(this.menuBar == null){
+            initMenuBar();
+        }
+        return this.menuBar;
+    }
     public void initScoreBoardPanel(){
         this.scoreBoardPanel = new ScoreBoardPanel();
     }
