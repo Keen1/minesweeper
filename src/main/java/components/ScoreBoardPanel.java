@@ -1,9 +1,16 @@
 package components;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.net.URL;
+import java.util.Objects;
 
 public class ScoreBoardPanel extends JPanel{
+    private static final String DEAD_FACE_PATH = "/images/dead_face.png";
+    private static final String SMILING_FACE_PATH = "/images/smiling_face.png";
+    private static final String SUNGLASSES_FACE_PATH = "/images/sunglasses_face.png";
+    private static final String SURPRISED_FACE_PATH = "/images/surprised_face.png";
     private JLabel minesRemainingLabel;
     private JLabel secondsLabel;
     private JButton gameStatusButton;
@@ -18,12 +25,20 @@ public class ScoreBoardPanel extends JPanel{
 
     private void initComponents(){
 
-        setLayout(new FlowLayout(FlowLayout.RIGHT));
-        add(getSecondsLabel());
-        add(getGameStatusButton());
-        add(getMinesRemainingLabel());
+        setLayout(new BorderLayout());
+        add(getSecondsLabel(), BorderLayout.EAST);
+        JPanel buttonWrapperPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buttonWrapperPanel.add(getGameStatusButton());
+        add(buttonWrapperPanel, BorderLayout.CENTER);
+        add(getMinesRemainingLabel(), BorderLayout.WEST);
 
         setVisible(true);
+
+    }
+
+    public ImageIcon loadImage(String path){
+        URL imgURL = getClass().getResource(path);
+        return new ImageIcon(Objects.requireNonNull(imgURL));
 
     }
 
@@ -41,6 +56,7 @@ public class ScoreBoardPanel extends JPanel{
 
     private void initSecondsLabel(){
         this.secondsLabel = new JLabel("0");
+        this.secondsLabel.setBorder(new EmptyBorder(0,0,0,25));
 
     }
 
@@ -62,6 +78,7 @@ public class ScoreBoardPanel extends JPanel{
 
     private void initMinesRemainingLabel(){
         this.minesRemainingLabel = new JLabel("0");
+        this.minesRemainingLabel.setBorder(new EmptyBorder(0,25,0,0));
 
     }
     public JLabel getMinesRemainingLabel(){
@@ -72,7 +89,11 @@ public class ScoreBoardPanel extends JPanel{
     }
 
     private void initGameStatusButton(){
-        this.gameStatusButton = new JButton("status");
+        ImageIcon defaultButtonImage = loadImage(SMILING_FACE_PATH);
+        this.gameStatusButton = new JButton(defaultButtonImage);
+        this.gameStatusButton.setMinimumSize(new Dimension(64,64));
+        this.gameStatusButton.setMaximumSize(new Dimension(64,54));
+        this.gameStatusButton.setPreferredSize(new Dimension(64,64));
     }
     public JButton getGameStatusButton(){
         if(this.gameStatusButton == null){

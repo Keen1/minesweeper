@@ -2,9 +2,16 @@ package components;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
+import java.util.Objects;
 
 public class BoardPanel extends JPanel{
     private static final Dimension CELL_DIM = new Dimension(25,25);
+
+
+    private static final String MINE_PATH = "/images/mine.png";
+    private static final String RED_FLAG_PATH = "/images/red_flag.png";
+
     private int boardRows;
     private int boardColumns;
     private int mineCount;
@@ -44,6 +51,8 @@ public class BoardPanel extends JPanel{
         setVisible(true);
 
     }
+
+
 
 
 
