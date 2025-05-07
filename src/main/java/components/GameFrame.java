@@ -1,6 +1,7 @@
 package components;
 
 import controllers.GameController;
+import models.GameModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,11 +15,15 @@ public class GameFrame extends JFrame {
 
     private  ScoreBoardPanel scoreBoardPanel;
     private  BoardPanel boardPanel;
+    private GameController gameController;
+    private GameModel gameModel;
 
     public GameFrame(){
         initComponents();
+        initGameController();
 
     }
+
 
     private void initComponents(){
 
@@ -27,6 +32,26 @@ public class GameFrame extends JFrame {
         add(getBoardPanel(), BorderLayout.CENTER);
         pack();
 
+    }
+
+    private void initGameController(){
+        this.gameController = new GameController(this, this.getBoardPanel(), this.getScoreBoardPanel(), this.getGameModel());
+    }
+
+    public GameController getGameController(){
+        if(this.gameController == null){
+            initGameController();
+        }
+        return this.gameController;
+    }
+    private void initGameModel(){
+        this.gameModel = new GameModel();
+    }
+    public GameModel getGameModel(){
+        if(this.gameModel == null){
+            initGameModel();
+        }
+        return gameModel;
     }
 
     public void showFrame(){
