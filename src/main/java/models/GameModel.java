@@ -1,8 +1,6 @@
 package models;
 
 import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.List;
 
 //game model class
 //contains the board and some summary stats regarding the game state
@@ -11,8 +9,8 @@ public class GameModel {
     //board and state attributes
     private Board board;
     private int flaggedCount;
-    private int bombCount;
-    private int unflaggedBombCount;
+    private int mineCount;
+    private int unflaggedMineCount;
 
     //constructors
     public GameModel(){}
@@ -38,16 +36,16 @@ public class GameModel {
     }
 
     //update the count for the current number of bombs not flagged by the user
-    public void updateUnflaggedBombCount(){
-        int unflaggedBombs = this.getUnflaggedBombCount();
+    public void updateUnflaggedMineCount(){
+        int unflaggedMines = this.getUnflaggedMineCount();
         for(int i = 0; i < this.getBoard().getCells().length; i++){
             for(int j = 0; j < this.getBoard().getCells()[i].length; j++){
-                if(this.getBoard().getCells()[i][j].hasBomb() && !this.getBoard().getCells()[i][j].hasUserFlag()){
-                    unflaggedBombs++;
+                if(this.getBoard().getCells()[i][j].hasMine() && !this.getBoard().getCells()[i][j].hasUserFlag()){
+                    unflaggedMines++;
                 }
             }
         }
-        this.setUnflaggedBombCount(unflaggedBombs);
+        this.setUnflaggedMineCount(unflaggedMines);
     }
 
     //determine which cells adjacent to the specified cell have a bomb
@@ -66,7 +64,7 @@ public class GameModel {
                 if(nextRow >= 0 && nextRow < this.getBoard().getCells().length &&
                         nextCol >=0 && nextCol < this.getBoard().getCells()[nextRow].length){
 
-                    if(this.getBoard().getCells()[nextRow][nextCol].hasBomb()){
+                    if(this.getBoard().getCells()[nextRow][nextCol].hasMine()){
                         count++;
                     }
 
@@ -79,7 +77,7 @@ public class GameModel {
     }
 
     //set a given number of bombs on the board given a count
-    public void setBombs(int count){
+    public void setMines(int count){
 
         //need to generate two random integers, the row value and the column value
         SecureRandom secureRand = new SecureRandom();
@@ -89,8 +87,8 @@ public class GameModel {
         while(count > 0){
             int randRow = secureRand.nextInt(maxRows);
             int randCol = secureRand.nextInt(maxCols);
-            if(!this.getBoard().getCell(randRow, randCol).hasBomb()){
-                this.getBoard().getCell(randRow, randCol).setBomb(true);
+            if(!this.getBoard().getCell(randRow, randCol).hasMine()){
+                this.getBoard().getCell(randRow, randCol).setMine(true);
                 count--;
             }
         }
@@ -98,19 +96,19 @@ public class GameModel {
     }
 
     //get the numbers of bombs that the user has yet to flag
-    public int getUnflaggedBombsRemaining(){
+    public int getUnflaggedMinesRemaining(){
 
-        int unflaggedBombs = 0;
+        int unflaggedMines = 0;
 
         for(int i = 0; i < this.getBoard().getCells().length; i++){
             for(int j = 0; j < this.getBoard().getCells()[i].length; j++){
-                if(this.getBoard().getCell(i, j).hasBomb() && !this.getBoard().getCell(i, j).hasUserFlag()){
-                    unflaggedBombs++;
+                if(this.getBoard().getCell(i, j).hasMine() && !this.getBoard().getCell(i, j).hasUserFlag()){
+                    unflaggedMines++;
                 }
             }
         }
 
-        return unflaggedBombs;
+        return unflaggedMines;
     }
 
     //reset the board with the current row and column conditions
@@ -132,8 +130,8 @@ public class GameModel {
     }
 
     //get the bomb status of a particular cell
-    public boolean hasBomb(int row, int col){
-        return this.getBoard().getCell(row, col).hasBomb();
+    public boolean hasMine(int row, int col){
+        return this.getBoard().getCell(row, col).hasMine();
     }
 
     //get the flagged status of a particular cell
@@ -143,7 +141,7 @@ public class GameModel {
 
     //set the bomb status of a particular cell
     public void setBomb(int row, int col, boolean bomb){
-        this.getBoard().getCell(row, col).setBomb(bomb);
+        this.getBoard().getCell(row, col).setMine(bomb);
     }
 
     //set the flagged status of a particular cell
@@ -172,23 +170,23 @@ public class GameModel {
     }
 
     //set the bomb count
-    public void setBombCount(int bombCount){
-        this.bombCount = bombCount;
+    public void setMineCount(int mineCount){
+        this.mineCount = mineCount;
     }
 
     //get the bomb count
-    public int getBombCount(){
-        return this.bombCount;
+    public int getMineCount(){
+        return this.mineCount;
     }
 
     //set number of unflagged bombs
-    public void setUnflaggedBombCount(int unflaggedBombCount){
-        this.unflaggedBombCount = unflaggedBombCount;
+    public void setUnflaggedMineCount(int unflaggedBombCount){
+        this.unflaggedMineCount = unflaggedBombCount;
     }
 
     //get the number of unflagged bombs
-    public int getUnflaggedBombCount(){
-        return this.unflaggedBombCount;
+    public int getUnflaggedMineCount(){
+        return this.unflaggedMineCount;
     }
 
 

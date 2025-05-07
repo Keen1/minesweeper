@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class ScoreBoardPanel {
     private JLabel flagsSet;
-    private JLabel bombsRemaining;
+    private JLabel minesRemaining;
     private JButton gameStatusButton;
 
     public ScoreBoardPanel(){
@@ -22,15 +22,15 @@ public class ScoreBoardPanel {
         return this.flagsSet;
     }
 
-    public void initBombsRemainingLabel(){
-        this.bombsRemaining = new JLabel("0");
+    public void initMinesRemainingLabel(){
+        this.minesRemaining = new JLabel("0");
 
     }
-    public JLabel getBombsRemainingLabel(){
-        if(this.bombsRemaining == null){
-            initBombsRemainingLabel();
+    public JLabel getMinesRemainingLabel(){
+        if(this.minesRemaining == null){
+            initMinesRemainingLabel();
         }
-        return this.bombsRemaining;
+        return this.minesRemaining;
     }
 
     public void initGameStatusButton(){

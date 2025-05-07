@@ -5,7 +5,7 @@ package models;
 public class Cell {
 
     //bomb and flag attributes
-    private boolean bomb;
+    private boolean mine;
     private boolean userFlag;
 
     //constructor
@@ -14,14 +14,14 @@ public class Cell {
     }
 
     //constructor
-    public Cell(boolean bomb, boolean userFlag){
-        this.bomb = bomb;
+    public Cell(boolean mine, boolean userFlag){
+        this.mine = mine;
         this.userFlag = userFlag;
     }
 
     //bomb status getter
-    public boolean hasBomb(){
-        return this.bomb;
+    public boolean hasMine(){
+        return this.mine;
     }
 
     //flag status getter
@@ -35,7 +35,7 @@ public class Cell {
     }
 
     //bomb status setter
-    public void setBomb(boolean bomb){
-        this.bomb = bomb;
+    public void setMine(boolean mine){
+        this.mine = mine;
     }
 }
