@@ -23,6 +23,7 @@ public class GameFrame extends JFrame {
     private JCheckBoxMenuItem beginnerDifficultyMenuItem;
     private JCheckBoxMenuItem intermediateDifficultyMenuItem;
     private JCheckBoxMenuItem expertDifficultyMenuItem;
+    private ButtonGroup difficultyGroup;
 
 
     public GameFrame(){
@@ -70,6 +71,20 @@ public class GameFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setPreferredSize(FRAME_DIM);
         setLayout(new BorderLayout());
+    }
+
+    private void initDifficultyGroup(){
+        this.difficultyGroup = new ButtonGroup();
+        this.difficultyGroup.add(getBeginnerDifficultyMenuItem());
+        this.difficultyGroup.add(getIntermediateDifficultyMenuItem());
+        this.difficultyGroup.add(getExpertDifficultyMenuItem());
+    }
+
+    public ButtonGroup getDifficultyGroup(){
+        if(this.difficultyGroup == null){
+            initDifficultyGroup();
+        }
+        return this.difficultyGroup;
     }
 
     private void initExpertDifficultyMenuItem(){
