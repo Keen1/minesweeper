@@ -16,7 +16,7 @@ import java.util.Objects;
 public class CellMineImageHandler extends MouseAdapter {
     //controller attribute
     private final GameController gameController;
-    //static mine image path
+    //static mine and flag  image paths
     private static final String MINE_PATH = "/images/mine.png";
     private static final String FLAG_PATH = "/images/red_flag_24.png";
     //static timer started boolean
@@ -50,23 +50,28 @@ public class CellMineImageHandler extends MouseAdapter {
             this.getGameController().startTimer();
 
         }
-
+        //get the source, row, and column
         CellButton source = (CellButton)event.getSource();
         int row = source.getRow();
         int column = source.getColumn();
+
         URL url = null;
         ImageIcon image;
+        //check if the click was a left or right click to determine if user was setting a flag
         if(SwingUtilities.isRightMouseButton(event)){
 
             url = getClass().getResource(FLAG_PATH);
 
         }else if(SwingUtilities.isLeftMouseButton(event)) {
 
-            if (this.getGameController().hasMine(row, column)) {
+            //check if the cell has a mine
+            if(this.getGameController().hasMine(row, column)) {
+
                 url = getClass().getResource(MINE_PATH);
 
-            } else {
+            }else{
 
+                //determine number of adjacent mines
                 int adjacentMines = this.getGameController().getAdjacentMines(row, column);
 
                 if (adjacentMines > 0) {
@@ -78,6 +83,7 @@ public class CellMineImageHandler extends MouseAdapter {
             }
         }
 
+        //init the image and set the cell's image icon
         if(url != null){
             image = new ImageIcon(Objects.requireNonNull(url));
             this.getGameController().setCellButtonImageIcon(source, image);
