@@ -28,9 +28,12 @@ public class ScoreBoardPanel extends JPanel{
     private Timer timer;
     private int seconds = 0;
 
+    private boolean gameOver;
+
     //constructor
     public ScoreBoardPanel(){
         initComponents();
+        this.gameOver = false;
     }
 
     //init the components of the panel
@@ -50,6 +53,10 @@ public class ScoreBoardPanel extends JPanel{
     //start the timer
     public void startTimer(){
         this.getTimer().start();
+    }
+
+    public void stopTimer(){
+        this.getTimer().stop();
     }
 
     //set the icon for the game status button to the smiling face icon
@@ -169,5 +176,13 @@ public class ScoreBoardPanel extends JPanel{
             initGameStatusButton();
         }
         return this.gameStatusButton;
+    }
+
+    public void setGameOver(boolean gameOver){
+        this.gameOver = gameOver;
+    }
+
+    public boolean isGameOver(){
+        return this.gameOver;
     }
 }

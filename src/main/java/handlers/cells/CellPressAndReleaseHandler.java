@@ -60,6 +60,8 @@ public class CellPressAndReleaseHandler extends MouseAdapter {
 
             if(this.getGameController().hasMine(row, col)){
                 this.getGameController().setDeadImageIcon();
+                this.getGameController().disableBoardPanel();
+                this.getGameController().stopTimer();
 
             }else{
                 this.getGameController().setSmilingImageIcon();

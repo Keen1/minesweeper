@@ -42,6 +42,31 @@ public class GameController {
         registerTimerHandler();
     }
 
+    public void disableBoardPanel(){
+        this.disablePanel(this.getBoardPanel());
+    }
+
+    private void disablePanel(JPanel panel){
+        panel.setEnabled(false);
+        for(Component component : panel.getComponents()){
+            component.setEnabled(false);
+
+            if(component instanceof Container){
+                disableComponents((Container)component);
+            }
+        }
+    }
+
+    private void disableComponents(Container container){
+        for(Component component : container.getComponents()){
+            component.setEnabled(false);
+
+            if(component instanceof Container){
+                disableComponents((Container)component);
+            }
+        }
+    }
+
     //set the difficulty of the gui and the model give nthe rows, columns, and mine count
     public void setModelDifficulty(int row, int col, int mineCount){
         this.getGameModel().resetBoard(row, col, mineCount);
@@ -80,6 +105,10 @@ public class GameController {
     //start the timer for the scoreboard
     public void startTimer(){
         this.getScoreBoardPanel().startTimer();
+    }
+
+    public void stopTimer(){
+        this.getScoreBoardPanel().stopTimer();
     }
 
     //set the surprised image icon on the status button
