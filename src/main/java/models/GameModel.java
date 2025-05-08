@@ -12,9 +12,9 @@ public class GameModel {
     private int mineCount;
     private int unflaggedMineCount;
 
-    private static int DEFAULT_ROWS = 9;
-    private static int DEFAULT_COLS = 9;
-    private static int DEFAULT_MINES= 10;
+    private static final int DEFAULT_ROWS = 9;
+    private static final int DEFAULT_COLS = 9;
+    private static final int DEFAULT_MINES= 10;
 
     //constructors
     public GameModel(){
@@ -50,7 +50,7 @@ public class GameModel {
         this.setFlaggedCount(flagged);
     }
 
-    //update the count for the current number of bombs not flagged by the user
+    //update the count for the current number of mines not flagged by the user
     public void updateUnflaggedMineCount(){
         int unflaggedMines = this.getUnflaggedMineCount();
         for(int i = 0; i < this.getBoard().getCells().length; i++){
@@ -63,7 +63,7 @@ public class GameModel {
         this.setUnflaggedMineCount(unflaggedMines);
     }
 
-    //determine which cells adjacent to the specified cell have a bomb
+    //determine which cells adjacent to the specified cell have a mines
     public int getAdjacentMinesCount(int row, int col){
 
         int count = 0;
@@ -91,9 +91,11 @@ public class GameModel {
 
     }
 
-    //set a given number of bombs on the board given a count
+    //set a given number of mines on the board given a count
     public void setMines(){
+
         if(this.getMineCount() != 0){
+
             int count = this.getMineCount();
             SecureRandom secureRand = new SecureRandom();
             int maxRows = this.getBoard().getCells().length;
@@ -157,7 +159,7 @@ public class GameModel {
         this.setMines();
     }
 
-    //get the bomb status of a particular cell
+    //get the mines status of a particular cell
     public boolean hasMine(int row, int col){
         return this.getBoard().getCell(row, col).hasMine();
     }
@@ -207,7 +209,7 @@ public class GameModel {
         return this.mineCount;
     }
 
-    //set number of unflagged bombs
+    //set number of unflagged mines
     public void setUnflaggedMineCount(int unflaggedBombCount){
         this.unflaggedMineCount = unflaggedBombCount;
     }
