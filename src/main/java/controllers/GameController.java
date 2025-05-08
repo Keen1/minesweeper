@@ -60,6 +60,10 @@ public class GameController {
         }
     }
 
+    public int getAdjacentMines(int row, int col){
+        return this.getGameModel().getAdjacentMinesCount(row, col);
+    }
+
     public boolean hasMine(int row, int col){
         return this.getGameModel().hasMine(row, col);
     }
