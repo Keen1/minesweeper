@@ -13,7 +13,18 @@ public class Board {
     }
     public Board(Cell[][] cells){
         this.cells = cells;
+        initCells();
+
     }
+
+    private void initCells(){
+        for(int i = 0; i < this.getCells().length; i++){
+            for(int j = 0; j < this.getCells()[i].length; j++){
+                this.getCells()[i][j] = new Cell(false, false);
+            }
+        }
+    }
+
 
     //cells setter
     public void setCells(Cell[][] cells){

@@ -17,11 +17,12 @@ public class BoardPanel extends JPanel{
     private int mineCount;
 
     private JButton[][] cellButtons;
+    private JPanel buttonPanel;
 
     public BoardPanel(){
-        this.boardRows = 30;
-        this.boardColumns = 24;
-        this.mineCount = 40;
+        this.boardRows = 9;
+        this.boardColumns = 9;
+        this.mineCount = 10;
         initComponents();
     }
 
@@ -32,31 +33,42 @@ public class BoardPanel extends JPanel{
         initComponents();
     }
 
-
-
-
     private void initComponents(){
-
-        setLayout(new GridBagLayout());
-
+        setLayout(new BorderLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         for(int i = 0; i < this.getCellButtons().length; i++){
             for(int j = 0; j < this.getCellButtons()[i].length; j++){
                 gbc.gridx = i;
                 gbc.gridy = j;
-                add(this.getCellButtons()[i][j], gbc);
+                this.getButtonPanel().add(this.getCellButtons()[i][j], gbc);
             }
         }
 
+        add(this.getButtonPanel(), BorderLayout.CENTER);
         setVisible(true);
+
 
     }
 
 
 
+    public void changeBoardSize(int rows, int cols, int mineCount){
+        this.setBoardRows(rows);
+        this.setBoardColumns(cols);
+        this.setMineCount(mineCount);
+        this.initCellButtons();
+    }
 
 
-
+    private void initButtonPanel(){
+        this.buttonPanel = new JPanel(new GridBagLayout());
+    }
+    public JPanel getButtonPanel(){
+        if(this.buttonPanel == null){
+            initButtonPanel();
+        }
+        return this.buttonPanel;
+    }
 
 
     private void initCellButtons(){
@@ -69,6 +81,10 @@ public class BoardPanel extends JPanel{
 
             }
         }
+    }
+
+    public void setCellButtons(JButton[][] cellButtons){
+        this.cellButtons = cellButtons;
     }
 
     public JButton[][] getCellButtons(){

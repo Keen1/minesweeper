@@ -77,20 +77,23 @@ public class GameModel {
     }
 
     //set a given number of bombs on the board given a count
-    public void setMines(int count){
+    public void setMines(){
+        if(this.getMineCount() != 0){
+            int count = this.getMineCount();
+            SecureRandom secureRand = new SecureRandom();
+            int maxRows = this.getBoard().getCells().length;
+            int maxCols = this.getBoard().getCells()[maxRows -1].length;
 
-        //need to generate two random integers, the row value and the column value
-        SecureRandom secureRand = new SecureRandom();
-        int maxRows = this.getBoard().getCells().length;
-        int maxCols = this.getBoard().getCells()[maxRows].length;
+            while(count > 0){
+                int randRow = secureRand.nextInt(maxRows);
+                int randCol = secureRand.nextInt(maxCols);
+                if(!this.getBoard().getCell(randRow, randCol).hasMine()){
+                    this.getBoard().getCell(randRow, randCol).setMine(true);
+                    count--;
+                }
 
-        while(count > 0){
-            int randRow = secureRand.nextInt(maxRows);
-            int randCol = secureRand.nextInt(maxCols);
-            if(!this.getBoard().getCell(randRow, randCol).hasMine()){
-                this.getBoard().getCell(randRow, randCol).setMine(true);
-                count--;
             }
+
         }
 
     }
@@ -127,6 +130,14 @@ public class GameModel {
         Cell[][] cells = new Cell[row][col];
         Board board = new Board(cells);
         this.setBoard(board);
+    }
+
+    public void resetBoard(int row, int col, int mineCount){
+        Cell[][] cells = new Cell[row][col];
+        Board board = new Board(cells);
+        this.setBoard(board);
+        this.setMineCount(mineCount);
+        this.setMines();
     }
 
     //get the bomb status of a particular cell

@@ -3,10 +3,11 @@ package controllers;
 import components.BoardPanel;
 import components.GameFrame;
 import components.ScoreBoardPanel;
-import handlers.CellClickedHandler;
+import handlers.cells.CellClickedHandler;
 import models.GameModel;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class GameController {
 
@@ -32,9 +33,17 @@ public class GameController {
         registerCellMouseHandlers();
     }
 
-    public void setDifficulty(int row, int col, int mineCount){
-        this.getGameModel().resetBoard(row, col);
+
+    public void setModelDifficulty(int row, int col, int mineCount){
+        this.getGameModel().resetBoard(row, col, mineCount);
+        this.getBoardPanel().changeBoardSize(row, col, mineCount);
     }
+
+    public void setFrameBoardPanel(int row, int col, int mineCount, Dimension dimension){
+        this.getGameFrame().changeBoardPanel(row, col, mineCount, dimension);
+    }
+
+
 
     public void registerCellMouseHandlers(){
         JButton statusButton = this.getScoreBoardPanel().getGameStatusButton();
@@ -54,6 +63,7 @@ public class GameController {
     }
     public void setBoardPanel(BoardPanel boardPanel){
         this.boardPanel = boardPanel;
+        registerCellMouseHandlers();
     }
     public BoardPanel getBoardPanel(){
         return this.boardPanel;

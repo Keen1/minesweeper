@@ -10,6 +10,8 @@ public class Cell {
 
     //constructor
     public Cell(){
+        this.mine = false;
+        this.userFlag = false;
 
     }
 
