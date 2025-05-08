@@ -17,7 +17,7 @@ public class ScoreBoardPanel extends JPanel{
 
     private Timer timer;
 
-    int seconds = 0;
+    private int seconds = 0;
 
     public ScoreBoardPanel(){
         initComponents();
@@ -34,6 +34,10 @@ public class ScoreBoardPanel extends JPanel{
 
         setVisible(true);
 
+    }
+
+    public void startTimer(){
+        this.getTimer().start();
     }
 
     //set the icon for the game status button to the smiling face icon
@@ -78,6 +82,23 @@ public class ScoreBoardPanel extends JPanel{
             initTimer();
         }
         return this.timer;
+    }
+
+    public void updateSeconds(){
+        int seconds = this.getSeconds();
+        seconds++;
+        this.setSeconds(seconds);
+        this.updateSecondsLabel();
+    }
+    public int getSeconds(){
+        return this.seconds;
+    }
+    public void setSeconds(int seconds){
+        this.seconds = seconds;
+    }
+
+    private void updateSecondsLabel(){
+        this.getSecondsLabel().setText(Integer.toString(this.getSeconds()));
     }
 
 

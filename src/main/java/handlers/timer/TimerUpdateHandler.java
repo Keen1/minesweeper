@@ -15,7 +15,7 @@ public class TimerUpdateHandler implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event){
-
+        this.getGameController().updateTimer();
     }
 
     public GameController getGameController(){

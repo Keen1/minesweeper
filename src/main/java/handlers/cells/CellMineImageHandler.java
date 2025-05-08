@@ -34,6 +34,8 @@ public class CellMineImageHandler extends MouseAdapter {
     public void mouseClicked(MouseEvent event) {
         if(!timeHasStarted()){
             setTimeStarted(true);
+            this.getGameController().startTimer();
+
         }
         CellButton source = (CellButton)event.getSource();
         int row = source.getRow();

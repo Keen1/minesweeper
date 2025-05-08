@@ -5,6 +5,7 @@ import components.GameFrame;
 import components.ScoreBoardPanel;
 import handlers.cells.CellMineImageHandler;
 import handlers.cells.CellPressAndReleaseHandler;
+import handlers.timer.TimerUpdateHandler;
 import models.GameModel;
 
 import javax.swing.*;
@@ -37,6 +38,7 @@ public class GameController {
         this.scoreBoardPanel = scoreBoardPanel;
         this.gameModel = gameModel;
         registerCellMouseHandlers();
+        registerTimerHandler();
     }
 
     //set the difficulty of the gui and the model give nthe rows, columns, and mine count
@@ -50,6 +52,10 @@ public class GameController {
         this.getGameFrame().changeBoardPanel(row, col, mineCount, dimension);
     }
 
+    public void registerTimerHandler(){
+        this.getScoreBoardPanel().getTimer().addActionListener(new TimerUpdateHandler(this));
+    }
+
     //register mouse handlers on cell buttons
     public void registerCellMouseHandlers(){
         JButton[][] cellButtons = this.getBoardPanel().getCellButtons();
@@ -59,6 +65,14 @@ public class GameController {
                 cell.addMouseListener(new CellMineImageHandler(this));
             }
         }
+    }
+
+    public void updateTimer(){
+        this.getScoreBoardPanel().updateSeconds();
+    }
+
+    public void startTimer(){
+        this.getScoreBoardPanel().startTimer();
     }
 
     //set the surprised image icon on the status button
