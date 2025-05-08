@@ -38,7 +38,10 @@ public class CellPressAndReleaseHandler extends MouseAdapter {
     //change the image to the "surprised face" when the user presses the mouse on a cell
     @Override
     public void mousePressed(MouseEvent event){
-        this.getGameController().setSurprisedImageIcon();
+        if(SwingUtilities.isLeftMouseButton(event)){
+            this.getGameController().setSurprisedImageIcon();
+
+        }
 
     }
 
@@ -48,19 +51,20 @@ public class CellPressAndReleaseHandler extends MouseAdapter {
     @Override
     public void mouseReleased(MouseEvent event){
 
-        CellButton source = (CellButton)event.getSource();
-        int row = source.getRow();
-        int col = source.getColumn();
+        if(SwingUtilities.isLeftMouseButton(event)){
+
+            CellButton source = (CellButton)event.getSource();
+            int row = source.getRow();
+            int col = source.getColumn();
 
 
-        if(this.getGameController().hasMine(row, col)){
-            this.getGameController().setDeadImageIcon();
+            if(this.getGameController().hasMine(row, col)){
+                this.getGameController().setDeadImageIcon();
 
-        }else{
-            this.getGameController().setSmilingImageIcon();
+            }else{
+                this.getGameController().setSmilingImageIcon();
+            }
         }
-
-
     }
 
     //get the game controller

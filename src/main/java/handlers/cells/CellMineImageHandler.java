@@ -18,6 +18,7 @@ public class CellMineImageHandler extends MouseAdapter {
     private final GameController gameController;
     //static mine image path
     private static final String MINE_PATH = "/images/mine.png";
+    private static final String FLAG_PATH = "/images/red_flag_24.png";
     //static timer started boolean
     private static boolean timeStarted;
 
@@ -55,20 +56,26 @@ public class CellMineImageHandler extends MouseAdapter {
         int column = source.getColumn();
         URL url = null;
         ImageIcon image;
+        if(SwingUtilities.isRightMouseButton(event)){
 
-        if(this.getGameController().hasMine(row, column)){
-            url = getClass().getResource(MINE_PATH);
+            url = getClass().getResource(FLAG_PATH);
 
-        }else{
+        }else if(SwingUtilities.isLeftMouseButton(event)) {
 
-            int adjacentMines = this.getGameController().getAdjacentMines(row, column);
+            if (this.getGameController().hasMine(row, column)) {
+                url = getClass().getResource(MINE_PATH);
 
-            if(adjacentMines > 0){
-                String adjMineImgPath = PathVars.getPathFromInt(adjacentMines);
-                url = getClass().getResource(adjMineImgPath);
+            } else {
+
+                int adjacentMines = this.getGameController().getAdjacentMines(row, column);
+
+                if (adjacentMines > 0) {
+                    String adjMineImgPath = PathVars.getPathFromInt(adjacentMines);
+                    url = getClass().getResource(adjMineImgPath);
+                }
+
+
             }
-
-
         }
 
         if(url != null){
