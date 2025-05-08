@@ -56,7 +56,7 @@ public class GameController {
         JButton[][] cellButtons = this.getBoardPanel().getCellButtons();
         for (JButton[] cellRow : cellButtons) {
             for (JButton cell : cellRow) {
-                cell.addMouseListener(new CellPressAndReleaseHandler(statusButton));
+                cell.addMouseListener(new CellPressAndReleaseHandler(statusButton, this));
                 cell.addMouseListener(new CellMineImageHandler(this));
             }
         }

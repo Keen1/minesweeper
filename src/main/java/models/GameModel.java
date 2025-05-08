@@ -24,6 +24,7 @@ public class GameModel {
         this.board = board;
     }
 
+    //init the default board layout
     private void initDefaultBoard(){
         this.setMineCount(DEFAULT_MINES);
         Cell[][] cells = new Cell[DEFAULT_ROWS][DEFAULT_COLS];
