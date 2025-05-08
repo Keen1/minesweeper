@@ -7,13 +7,22 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/*
+* Difficulty handler
+* Handles the actions required to set the board component and game model correctly when the user selects a difficulty
+*
+ */
+
 public class DifficultyHandler implements ActionListener {
+
+    //attributes
     private final GameController gameController;
     private final Dimension dimension;
     private final int rowCount;
     private final int columnCount;
     private final int mineCount;
 
+    //constructor
     public DifficultyHandler(GameController gameController, Dimension dimension, int rowCount, int columnCount, int mineCount){
         this.gameController = gameController;
         this.dimension = dimension;
@@ -22,6 +31,7 @@ public class DifficultyHandler implements ActionListener {
         this.mineCount = mineCount;
     }
 
+    //set the model difficulty and the board panel given the set parameters
     @Override
     public void actionPerformed(ActionEvent event){
 
@@ -30,6 +40,7 @@ public class DifficultyHandler implements ActionListener {
 
     }
 
+    //getters and setters
     public GameController getGameController(){
         return this.gameController;
     }
