@@ -12,10 +12,25 @@ public class GameModel {
     private int mineCount;
     private int unflaggedMineCount;
 
+    private static int DEFAULT_ROWS = 9;
+    private static int DEFAULT_COLS = 9;
+    private static int DEFAULT_MINES= 10;
+
     //constructors
-    public GameModel(){}
+    public GameModel(){
+        initDefaultBoard();
+    }
     public GameModel(Board board){
         this.board = board;
+    }
+
+    private void initDefaultBoard(){
+        this.setMineCount(DEFAULT_MINES);
+        Cell[][] cells = new Cell[DEFAULT_ROWS][DEFAULT_COLS];
+        Board board = new Board(cells);
+        this.setBoard(board);
+        this.setMines();
+
     }
 
 
@@ -123,6 +138,7 @@ public class GameModel {
         Cell[][] cells = new Cell[row][col];
         Board board = new Board(cells);
         this.setBoard(board);
+        this.setMines();
     }
 
     //reset the board with new row and column conditions
@@ -130,6 +146,7 @@ public class GameModel {
         Cell[][] cells = new Cell[row][col];
         Board board = new Board(cells);
         this.setBoard(board);
+        this.setMines();
     }
 
     public void resetBoard(int row, int col, int mineCount){

@@ -9,8 +9,6 @@ public class Board {
     private Cell[][] cells;
 
     //constructors
-    public Board(){
-    }
     public Board(Cell[][] cells){
         this.cells = cells;
         initCells();

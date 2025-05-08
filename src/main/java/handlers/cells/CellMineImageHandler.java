@@ -30,11 +30,15 @@ public class CellMineImageHandler extends MouseAdapter {
             ImageIcon mineImage = new ImageIcon(Objects.requireNonNull(mineURL));
             source.setIcon(mineImage);
         }else{
+
             int adjacentMines = this.getGameController().getAdjacentMines(row, column);
-            String adjMineImgPath = PathVars.getPathFromInt(adjacentMines);
-            URL adjMineURL = getClass().getResource(adjMineImgPath);
-            ImageIcon adjMineDigitImg = new ImageIcon(Objects.requireNonNull(adjMineURL));
-            source.setIcon(adjMineDigitImg);
+            if(adjacentMines > 0){
+                String adjMineImgPath = PathVars.getPathFromInt(adjacentMines);
+                URL adjMineURL = getClass().getResource(adjMineImgPath);
+                ImageIcon adjMineDigitImg = new ImageIcon(Objects.requireNonNull(adjMineURL));
+                source.setIcon(adjMineDigitImg);
+            }
+
 
         }
     }
