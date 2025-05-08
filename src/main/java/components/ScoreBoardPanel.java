@@ -6,23 +6,34 @@ import java.awt.*;
 import java.net.URL;
 import java.util.Objects;
 
+/*
+* Scoreboard panel
+* tracks the scoreboard and the game status through the status button
+*/
+
 public class ScoreBoardPanel extends JPanel{
+
+    //static paths for the status button icons
     private static final String DEAD_FACE_PATH = "/images/dead_face.png";
     private static final String SMILING_FACE_PATH = "/images/smiling_face.png";
     private static final String SUNGLASSES_FACE_PATH = "/images/sunglasses_face.png";
     private static final String SURPRISED_FACE_PATH = "/images/surprised_face.png";
+
+    //components
     private JLabel minesRemainingLabel;
     private JLabel secondsLabel;
     private JButton gameStatusButton;
 
+    //timer for seconds label
     private Timer timer;
-
     private int seconds = 0;
 
+    //constructor
     public ScoreBoardPanel(){
         initComponents();
     }
 
+    //init the components of the panel
     private void initComponents(){
 
         setLayout(new BorderLayout());
@@ -36,6 +47,7 @@ public class ScoreBoardPanel extends JPanel{
 
     }
 
+    //start the timer
     public void startTimer(){
         this.getTimer().start();
     }
@@ -67,16 +79,21 @@ public class ScoreBoardPanel extends JPanel{
 
     }
 
+    //load a specific image
+    //TODO -- do we need this? Where is this used and why?
     public ImageIcon loadImage(String path){
         URL imgURL = getClass().getResource(path);
         return new ImageIcon(Objects.requireNonNull(imgURL));
 
     }
-
+    //init the timer
     private void initTimer(){
         //TODO: update the action listener here instead of using null
+        // this is updated in the controller but it might be best to set the listener here?
         this.timer = new Timer(1000, null);
     }
+
+    //get the timer
     public Timer getTimer(){
         if(this.timer == null){
             initTimer();
@@ -84,51 +101,52 @@ public class ScoreBoardPanel extends JPanel{
         return this.timer;
     }
 
+    //update the seconds variable
     public void updateSeconds(){
         int seconds = this.getSeconds();
         seconds++;
         this.setSeconds(seconds);
         this.updateSecondsLabel();
     }
+
+    //get the current seconds count
     public int getSeconds(){
         return this.seconds;
     }
+
+    //set the seconds count
     public void setSeconds(int seconds){
         this.seconds = seconds;
     }
 
+    //update the seconds label
     private void updateSecondsLabel(){
         this.getSecondsLabel().setText(Integer.toString(this.getSeconds()));
     }
 
-
+    //init the seconds label
     private void initSecondsLabel(){
         this.secondsLabel = new JLabel("0");
         this.secondsLabel.setBorder(new EmptyBorder(0,0,0,25));
 
     }
 
+    //get the seconds label
     public JLabel getSecondsLabel(){
         if(this.secondsLabel == null){
             initSecondsLabel();
         }
         return this.secondsLabel;
     }
-    private void updateSecondsLabel(int seconds){
-        this.setSecondsLabel(Integer.toString(seconds));
-    }
-    public void setSecondsLabel(String seconds){
-        this.secondsLabel.setText(seconds);
-    }
 
-
-
-
+    //init the mines remaining label
     private void initMinesRemainingLabel(){
         this.minesRemainingLabel = new JLabel("0");
         this.minesRemainingLabel.setBorder(new EmptyBorder(0,25,0,0));
 
     }
+
+    //get the mines remaining label
     public JLabel getMinesRemainingLabel(){
         if(this.minesRemainingLabel == null){
             initMinesRemainingLabel();
@@ -136,6 +154,7 @@ public class ScoreBoardPanel extends JPanel{
         return this.minesRemainingLabel;
     }
 
+    //init the game status button
     private void initGameStatusButton(){
         ImageIcon defaultButtonImage = loadImage(SMILING_FACE_PATH);
         this.gameStatusButton = new JButton(defaultButtonImage);
@@ -143,12 +162,12 @@ public class ScoreBoardPanel extends JPanel{
         this.gameStatusButton.setMaximumSize(new Dimension(64,54));
         this.gameStatusButton.setPreferredSize(new Dimension(64,64));
     }
+
+    //get the game status button
     public JButton getGameStatusButton(){
         if(this.gameStatusButton == null){
             initGameStatusButton();
         }
         return this.gameStatusButton;
     }
-
-
 }
