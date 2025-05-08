@@ -48,7 +48,6 @@ public class GameFrame extends JFrame {
         add(getBoardPanel(), BorderLayout.CENTER);
         setJMenuBar(getMenus());
         pack();
-
     }
 
     private void initGameController(){

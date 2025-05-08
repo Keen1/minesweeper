@@ -6,7 +6,7 @@ import javax.swing.*;
 *Cell button for front end. Tracks the location of the button via the row and column attribute while maintaining
 * JButton behavior through extension
 */
-public class CellButton extends JButton {
+public class CellButton extends JToggleButton {
     //attributes
     private final int row;
     private final int column;

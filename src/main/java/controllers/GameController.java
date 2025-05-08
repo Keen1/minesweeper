@@ -59,9 +59,9 @@ public class GameController {
 
     //register mouse handlers on cell buttons
     public void registerCellMouseHandlers(){
-        JButton[][] cellButtons = this.getBoardPanel().getCellButtons();
-        for (JButton[] cellRow : cellButtons) {
-            for (JButton cell : cellRow) {
+        JToggleButton[][] cellButtons = this.getBoardPanel().getCellButtons();
+        for (JToggleButton[] cellRow : cellButtons) {
+            for (JToggleButton cell : cellRow) {
                 cell.addMouseListener(new CellPressAndReleaseHandler(this));
                 cell.addMouseListener(new CellMineImageHandler(this));
             }
