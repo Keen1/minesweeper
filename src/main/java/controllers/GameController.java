@@ -5,21 +5,25 @@ import components.GameFrame;
 import components.ScoreBoardPanel;
 import handlers.cells.CellMineImageHandler;
 import handlers.cells.CellPressAndReleaseHandler;
-import models.Cell;
 import models.GameModel;
 
 import javax.swing.*;
 import java.awt.*;
 
+/*
+* Game Controller
+* manages the state of the game and the gui front end
+*/
 public class GameController {
 
+    //front end components and back end model
     private GameFrame gameFrame;
     private BoardPanel boardPanel;
     private ScoreBoardPanel scoreBoardPanel;
     private GameModel gameModel;
-    public GameController(){
 
-    }
+    //constructors
+    public GameController(){}
 
     public GameController(GameFrame gameFrame, BoardPanel boardPanel, ScoreBoardPanel scoreBoardPanel){
         this.gameFrame = gameFrame;
@@ -35,20 +39,18 @@ public class GameController {
         registerCellMouseHandlers();
     }
 
-
+    //set the difficulty of the gui and the model give nthe rows, columns, and mine count
     public void setModelDifficulty(int row, int col, int mineCount){
         this.getGameModel().resetBoard(row, col, mineCount);
         this.getBoardPanel().changeBoardSize(row, col, mineCount);
     }
 
+    //set the new frame board panel
     public void setFrameBoardPanel(int row, int col, int mineCount, Dimension dimension){
         this.getGameFrame().changeBoardPanel(row, col, mineCount, dimension);
     }
 
-
-
-
-
+    //register mouse handlers on cell buttons
     public void registerCellMouseHandlers(){
         JButton statusButton = this.getScoreBoardPanel().getGameStatusButton();
         JButton[][] cellButtons = this.getBoardPanel().getCellButtons();
@@ -60,38 +62,53 @@ public class GameController {
         }
     }
 
+    //get the number of adjacent mines given a cell's row and column
     public int getAdjacentMines(int row, int col){
         return this.getGameModel().getAdjacentMinesCount(row, col);
     }
 
+    //determine if a cell has a mine given its row and column
     public boolean hasMine(int row, int col){
         return this.getGameModel().hasMine(row, col);
     }
 
+    //set the game frame
     public void setGameFrame(GameFrame gameFrame){
         this.gameFrame = gameFrame;
     }
+
+    //get the game frame
     public GameFrame getGameFrame(){
         return this.gameFrame;
     }
+
+    //set the board panel
     public void setBoardPanel(BoardPanel boardPanel){
         this.boardPanel = boardPanel;
         registerCellMouseHandlers();
     }
+
+    //get the board panel
     public BoardPanel getBoardPanel(){
         return this.boardPanel;
     }
 
+    //set the scoreboard panel
     public void setScoreBoardPanel(ScoreBoardPanel scoreBoardPanel){
         this.scoreBoardPanel = scoreBoardPanel;
     }
+
+    //get the scoreboard panel
     public ScoreBoardPanel getScoreBoardPanel(){
         return this.scoreBoardPanel;
     }
 
+    //set the game model
     public void setGameModel(GameModel gameModel){
         this.gameModel = gameModel;
     }
+
+    //get the game model
     public GameModel getGameModel(){
         return this.gameModel;
     }
