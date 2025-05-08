@@ -3,7 +3,9 @@ package controllers;
 import components.BoardPanel;
 import components.GameFrame;
 import components.ScoreBoardPanel;
+import handlers.cells.CellMineImageHandler;
 import handlers.cells.CellPressAndReleaseHandler;
+import models.Cell;
 import models.GameModel;
 
 import javax.swing.*;
@@ -45,14 +47,21 @@ public class GameController {
 
 
 
+
+
     public void registerCellMouseHandlers(){
         JButton statusButton = this.getScoreBoardPanel().getGameStatusButton();
         JButton[][] cellButtons = this.getBoardPanel().getCellButtons();
         for (JButton[] cellRow : cellButtons) {
             for (JButton cell : cellRow) {
                 cell.addMouseListener(new CellPressAndReleaseHandler(statusButton));
+                cell.addMouseListener(new CellMineImageHandler(this));
             }
         }
+    }
+
+    public boolean hasMine(int row, int col){
+        return this.getGameModel().hasMine(row, col);
     }
 
     public void setGameFrame(GameFrame gameFrame){

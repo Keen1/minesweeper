@@ -1,5 +1,7 @@
 package components;
 
+import handlers.cells.CellMineImageHandler;
+
 import javax.swing.*;
 import java.awt.*;
 

@@ -1,0 +1,38 @@
+package handlers.cells;
+
+import components.CellButton;
+import controllers.GameController;
+
+import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.net.URL;
+import java.util.Objects;
+
+public class CellMineImageHandler extends MouseAdapter {
+    private final GameController gameController;
+    private static final String MINE_PATH = "/images/mine.png";
+
+    public CellMineImageHandler(GameController gameController){
+        this.gameController = gameController;
+    }
+
+
+    @Override
+    public void mouseClicked(MouseEvent event) {
+        CellButton source = (CellButton)event.getSource();
+        int row = source.getRow();
+        int column = source.getColumn();
+        if(this.getGameController().hasMine(row, column)){
+
+            URL mineURL = getClass().getResource(MINE_PATH);
+            ImageIcon mineImage = new ImageIcon(Objects.requireNonNull(mineURL));
+            source.setIcon(mineImage);
+        }
+    }
+
+
+    public GameController getGameController(){
+        return this.gameController;
+    }
+}
