@@ -36,6 +36,22 @@ public class ScoreBoardPanel extends JPanel{
 
     }
 
+    public void setSmilingFaceIcon(){
+        URL url = getClass().getResource(SMILING_FACE_PATH);
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(url));
+        this.getGameStatusButton().setIcon(icon);
+    }
+    public void setSurprisedFaceIcon(){
+        URL url = getClass().getResource(SURPRISED_FACE_PATH);
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(url));
+        this.getGameStatusButton().setIcon(icon);
+    }
+    public void setDeadFaceIcon(){
+        URL url = getClass().getResource(DEAD_FACE_PATH);
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(url));
+        this.getGameStatusButton().setIcon(icon);
+    }
+
     public ImageIcon loadImage(String path){
         URL imgURL = getClass().getResource(path);
         return new ImageIcon(Objects.requireNonNull(imgURL));
