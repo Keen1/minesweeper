@@ -3,7 +3,7 @@ package controllers;
 import components.BoardPanel;
 import components.GameFrame;
 import components.ScoreBoardPanel;
-import handlers.cells.CellClickedHandler;
+import handlers.cells.CellPressAndReleaseHandler;
 import models.GameModel;
 
 import javax.swing.*;
@@ -50,7 +50,7 @@ public class GameController {
         JButton[][] cellButtons = this.getBoardPanel().getCellButtons();
         for (JButton[] cellRow : cellButtons) {
             for (JButton cell : cellRow) {
-                cell.addMouseListener(new CellClickedHandler(statusButton));
+                cell.addMouseListener(new CellPressAndReleaseHandler(statusButton));
             }
         }
     }

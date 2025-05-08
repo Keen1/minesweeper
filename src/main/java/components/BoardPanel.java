@@ -2,8 +2,6 @@ package components;
 
 import javax.swing.*;
 import java.awt.*;
-import java.net.URL;
-import java.util.Objects;
 
 public class BoardPanel extends JPanel{
     private static final Dimension CELL_DIM = new Dimension(25,25);
@@ -16,7 +14,7 @@ public class BoardPanel extends JPanel{
     private int boardColumns;
     private int mineCount;
 
-    private JButton[][] cellButtons;
+    private CellButton[][] cellButtons;
     private JPanel buttonPanel;
 
     public BoardPanel(){
@@ -72,10 +70,10 @@ public class BoardPanel extends JPanel{
 
 
     private void initCellButtons(){
-        this.cellButtons = new JButton[this.getBoardRows()][this.getBoardColumns()];
+        this.cellButtons = new CellButton[this.getBoardRows()][this.getBoardColumns()];
         for(int i = 0; i < this.getBoardRows(); i++){
             for(int j = 0; j < this.getBoardColumns(); j++){
-                this.cellButtons[i][j] = new JButton();
+                this.cellButtons[i][j] = new CellButton(i, j);
                 this.cellButtons[i][j].setPreferredSize(CELL_DIM);
                 this.cellButtons[i][j].setMinimumSize(CELL_DIM);
 
@@ -83,11 +81,11 @@ public class BoardPanel extends JPanel{
         }
     }
 
-    public void setCellButtons(JButton[][] cellButtons){
+    public void setCellButtons(CellButton[][] cellButtons){
         this.cellButtons = cellButtons;
     }
 
-    public JButton[][] getCellButtons(){
+    public CellButton[][] getCellButtons(){
 
         if(this.cellButtons == null){
             initCellButtons();

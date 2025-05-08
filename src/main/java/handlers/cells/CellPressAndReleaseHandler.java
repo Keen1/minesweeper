@@ -6,11 +6,11 @@ import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.Objects;
 
-public class CellClickedHandler extends MouseAdapter {
+public class CellPressAndReleaseHandler extends MouseAdapter {
     private final JButton statusButton;
     private static final String MOUSE_CLICKED_PATH = "/images/surprised_face.png";
     private static final String MOUSE_RELEASED_PATH = "/images/smiling_face.png";
-    public CellClickedHandler(JButton statusButton){
+    public CellPressAndReleaseHandler(JButton statusButton){
         this.statusButton = statusButton;
     }
 
