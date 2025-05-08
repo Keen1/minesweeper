@@ -12,15 +12,29 @@ import java.util.Objects;
 
 public class CellMineImageHandler extends MouseAdapter {
     private final GameController gameController;
+
     private static final String MINE_PATH = "/images/mine.png";
+
+    private static boolean timeStarted;
 
     public CellMineImageHandler(GameController gameController){
         this.gameController = gameController;
+        timeStarted = false;
+    }
+
+    public boolean timeHasStarted(){
+        return timeStarted;
+    }
+    public void setTimeStarted(boolean started){
+        timeStarted = started;
     }
 
 
     @Override
     public void mouseClicked(MouseEvent event) {
+        if(!timeHasStarted()){
+            setTimeStarted(true);
+        }
         CellButton source = (CellButton)event.getSource();
         int row = source.getRow();
         int column = source.getColumn();
