@@ -1,6 +1,7 @@
 package controllers;
 
 import components.BoardPanel;
+import components.CellButton;
 import components.GameFrame;
 import components.ScoreBoardPanel;
 import handlers.cells.CellMineImageHandler;
@@ -67,10 +68,16 @@ public class GameController {
         }
     }
 
+    public void setCellButtonImageIcon(CellButton button, ImageIcon image){
+        this.getBoardPanel().setCellImageIcon(button, image);
+    }
+
+    //update the timer for the scoreboard
     public void updateTimer(){
         this.getScoreBoardPanel().updateSeconds();
     }
 
+    //start the timer for the scoreboard
     public void startTimer(){
         this.getScoreBoardPanel().startTimer();
     }

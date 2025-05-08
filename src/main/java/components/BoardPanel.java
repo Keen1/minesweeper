@@ -96,6 +96,10 @@ public class BoardPanel extends JPanel{
         return this.cellButtons;
     }
 
+    public void setCellImageIcon(CellButton button, ImageIcon icon){
+        button.setIcon(icon);
+    }
+
     public void setMineCount(int mineCount){
         this.mineCount = mineCount;
     }
