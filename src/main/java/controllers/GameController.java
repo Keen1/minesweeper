@@ -61,12 +61,17 @@ public class GameController {
         }
     }
 
+    //set the surprised image icon on the status button
     public void setSurprisedImageIcon(){
         this.getScoreBoardPanel().setSurprisedFaceIcon();
     }
+
+    //set the smiling image icon on the status button
     public void setSmilingImageIcon(){
         this.getScoreBoardPanel().setSmilingFaceIcon();
     }
+
+    //set the dead image icon on the status button
     public void setDeadImageIcon(){
         this.getScoreBoardPanel().setDeadFaceIcon();
     }

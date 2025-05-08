@@ -36,20 +36,31 @@ public class ScoreBoardPanel extends JPanel{
 
     }
 
+    //set the icon for the game status button to the smiling face icon
     public void setSmilingFaceIcon(){
+
         URL url = getClass().getResource(SMILING_FACE_PATH);
         ImageIcon icon = new ImageIcon(Objects.requireNonNull(url));
         this.getGameStatusButton().setIcon(icon);
+
     }
+
+    //set the icon for the game status button to the smiling face icon
     public void setSurprisedFaceIcon(){
+
         URL url = getClass().getResource(SURPRISED_FACE_PATH);
         ImageIcon icon = new ImageIcon(Objects.requireNonNull(url));
         this.getGameStatusButton().setIcon(icon);
+
     }
+
+    //set the icon for the game status button to the dead face icon
     public void setDeadFaceIcon(){
+
         URL url = getClass().getResource(DEAD_FACE_PATH);
         ImageIcon icon = new ImageIcon(Objects.requireNonNull(url));
         this.getGameStatusButton().setIcon(icon);
+
     }
 
     public ImageIcon loadImage(String path){
