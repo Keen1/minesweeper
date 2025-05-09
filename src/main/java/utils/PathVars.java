@@ -1,5 +1,8 @@
 package utils;
-
+/*
+* path vars enum
+* holds the image paths associated with their numeric symbol
+*/
 public enum PathVars {
     ONE(1, "/images/one.png"),
     TWO(2, "/images/two.png"),

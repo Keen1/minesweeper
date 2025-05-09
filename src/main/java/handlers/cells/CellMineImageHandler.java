@@ -91,7 +91,7 @@ public class CellMineImageHandler extends MouseAdapter {
         }
     }
 
-
+    //get the game controller
     public GameController getGameController(){
         return this.gameController;
     }
