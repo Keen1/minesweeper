@@ -6,8 +6,6 @@ import controllers.GameController;
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.net.URL;
-import java.util.Objects;
 
 /*
 * cell press and release handler
@@ -57,10 +55,11 @@ public class CellPressAndReleaseHandler extends MouseAdapter {
             int row = source.getRow();
             int col = source.getColumn();
 
-
+            //TODO: this is where we want the game state to move to game over
+            //
             if(this.getGameController().hasMine(row, col)){
                 this.getGameController().setDeadImageIcon();
-                this.getGameController().disableBoardPanel();
+                this.getGameController().disableBoardPanel();//TODO: this call is not working like we want it to
                 this.getGameController().stopTimer();
 
             }else{
