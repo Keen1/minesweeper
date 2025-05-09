@@ -24,15 +24,7 @@ public class GameController {
     private ScoreBoardPanel scoreBoardPanel;
     private GameModel gameModel;
 
-    //constructors
-    public GameController(){}
-
-    public GameController(GameFrame gameFrame, BoardPanel boardPanel, ScoreBoardPanel scoreBoardPanel){
-        this.gameFrame = gameFrame;
-        this.boardPanel = boardPanel;
-        this.scoreBoardPanel = scoreBoardPanel;
-
-    }
+    //constructor
     public GameController(GameFrame gameFrame, BoardPanel boardPanel, ScoreBoardPanel scoreBoardPanel, GameModel gameModel){
         this.gameFrame = gameFrame;
         this.boardPanel = boardPanel;
