@@ -34,10 +34,12 @@ public class GameController {
         registerTimerHandler();
     }
 
+    //disable the board panel. TODO: Doesn't work as intended
     public void disableBoardPanel(){
         this.disablePanel(this.getBoardPanel());
     }
 
+    //disable any panel and its components passed. TODO Doesn't work as intended
     private void disablePanel(JPanel panel){
         panel.setEnabled(false);
         for(Component component : panel.getComponents()){
@@ -49,6 +51,7 @@ public class GameController {
         }
     }
 
+    //disable any components associated with a container. TODO Doesn't work as intended
     private void disableComponents(Container container){
         for(Component component : container.getComponents()){
             component.setEnabled(false);
