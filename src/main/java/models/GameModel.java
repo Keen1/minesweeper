@@ -136,7 +136,7 @@ public class GameModel {
     public void resetBoard(){
 
         int row = this.getBoard().getCells().length;
-        int col = this.getBoard().getCells()[row].length;
+        int col = this.getBoard().getCells()[row - 1].length;
 
         Cell[][] cells = new Cell[row][col];
         Board board = new Board(cells);

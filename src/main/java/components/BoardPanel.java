@@ -90,6 +90,10 @@ public class BoardPanel extends JPanel{
         }
     }
 
+    public void resetPanel(){
+        initCellButtons();
+    }
+
     //set the cell buttons
     public void setCellButtons(CellButton[][] cellButtons){
         this.cellButtons = cellButtons;

@@ -108,6 +108,11 @@ public class ScoreBoardPanel extends JPanel{
         return this.timer;
     }
 
+    public void resetTimer(){
+        this.timer.restart();
+        this.setSeconds(0);
+    }
+
     //update the seconds variable
     public void updateSeconds(){
         int seconds = this.getSeconds();
@@ -168,6 +173,8 @@ public class ScoreBoardPanel extends JPanel{
         this.gameStatusButton.setMinimumSize(new Dimension(64,64));
         this.gameStatusButton.setMaximumSize(new Dimension(64,54));
         this.gameStatusButton.setPreferredSize(new Dimension(64,64));
+
+
     }
 
     //get the game status button

@@ -6,6 +6,7 @@ import components.GameFrame;
 import components.ScoreBoardPanel;
 import handlers.cells.CellMineImageHandler;
 import handlers.cells.CellPressAndReleaseHandler;
+import handlers.status.GameResetHandler;
 import handlers.timer.TimerUpdateHandler;
 import models.GameModel;
 
@@ -32,6 +33,7 @@ public class GameController {
         this.gameModel = gameModel;
         registerCellMouseHandlers();
         registerTimerHandler();
+        registerStatusButtonHandler();
     }
 
     //disable the board panel. TODO: Doesn't work as intended
@@ -62,6 +64,12 @@ public class GameController {
         }
     }
 
+    public void resetBoard(){
+        this.getGameModel().resetBoard();
+        this.getBoardPanel().resetPanel();
+        this.resetTimer();
+    }
+
     //set the difficulty of the gui and the model give nthe rows, columns, and mine count
     public void setModelDifficulty(int row, int col, int mineCount){
         this.getGameModel().resetBoard(row, col, mineCount);
@@ -71,6 +79,10 @@ public class GameController {
     //set the new frame board panel
     public void setFrameBoardPanel(int row, int col, int mineCount, Dimension dimension){
         this.getGameFrame().changeBoardPanel(row, col, mineCount, dimension);
+    }
+
+    public void registerStatusButtonHandler(){
+        this.getScoreBoardPanel().getGameStatusButton().addActionListener(new GameResetHandler(this));
     }
 
     public void registerTimerHandler(){
@@ -90,6 +102,10 @@ public class GameController {
 
     public void setCellButtonImageIcon(CellButton button, ImageIcon image){
         this.getBoardPanel().setCellImageIcon(button, image);
+    }
+
+    public void resetTimer(){
+        this.getScoreBoardPanel().resetTimer();
     }
 
     //update the timer for the scoreboard
