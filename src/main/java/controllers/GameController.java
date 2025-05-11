@@ -66,7 +66,11 @@ public class GameController {
 
     public void resetBoard(){
         this.getGameModel().resetBoard();
-        this.getBoardPanel().resetPanel();
+        int rows = this.getBoardPanel().getBoardRows();
+        int columns = this.getBoardPanel().getBoardColumns();
+        int mineCount = this.getBoardPanel().getMineCount();
+        Dimension dimension = this.getGameFrame().getSize();
+        this.getGameFrame().changeBoardPanel(rows, columns, mineCount, dimension);
         this.resetTimer();
     }
 

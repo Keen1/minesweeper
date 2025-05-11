@@ -56,6 +56,8 @@ public class GameFrame extends JFrame {
         pack();
     }
 
+
+
     //initialize the game controller
     private void initGameController(){
         this.gameController = new GameController(this, this.getBoardPanel(), this.getScoreBoardPanel(), this.getGameModel());

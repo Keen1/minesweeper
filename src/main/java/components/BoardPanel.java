@@ -56,6 +56,8 @@ public class BoardPanel extends JPanel{
     }
 
 
+
+
     //change the size of the board
     public void changeBoardSize(int rows, int cols, int mineCount){
         this.setBoardRows(rows);
@@ -88,10 +90,6 @@ public class BoardPanel extends JPanel{
 
             }
         }
-    }
-
-    public void resetPanel(){
-        initCellButtons();
     }
 
     //set the cell buttons
