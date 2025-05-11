@@ -69,6 +69,7 @@ public class CellMineImageHandler extends MouseAdapter {
 
                 url = getClass().getResource(MINE_PATH);
 
+
             }else{
 
                 //determine number of adjacent mines
@@ -86,7 +87,10 @@ public class CellMineImageHandler extends MouseAdapter {
         //init the image and set the cell's image icon
         if(url != null){
             image = new ImageIcon(Objects.requireNonNull(url));
-            this.getGameController().setCellButtonImageIcon(source, image);
+            SwingUtilities.invokeLater(()->{
+                this.getGameController().setCellButtonImageIcon(source, image);
+
+                    });
 
         }
     }

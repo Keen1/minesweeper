@@ -78,10 +78,15 @@ public class GameController {
         JToggleButton[][] cellButtons = this.getBoardPanel().getCellButtons();
         for (JToggleButton[] cellRow : cellButtons) {
             for (JToggleButton cell : cellRow) {
-                cell.addMouseListener(new CellPressAndReleaseHandler(this));
                 cell.addMouseListener(new CellMineImageHandler(this));
+
+                cell.addMouseListener(new CellPressAndReleaseHandler(this));
             }
         }
+    }
+
+    public CellButton getCellButton(int row, int column){
+        return this.getBoardPanel().getCellButton(row, column);
     }
 
     public void setCellButtonImageIcon(CellButton button, ImageIcon image){

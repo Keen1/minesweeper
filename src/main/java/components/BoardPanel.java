@@ -162,6 +162,10 @@ public class BoardPanel extends JPanel{
         return this.cellButtons;
     }
 
+    public CellButton getCellButton(int row, int column){
+        return this.getCellButtons()[row][column];
+    }
+
     //set the cell button's image icon
     public void setCellImageIcon(CellButton button, ImageIcon icon){
         button.setIcon(icon);

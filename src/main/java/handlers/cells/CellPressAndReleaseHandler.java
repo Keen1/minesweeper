@@ -6,6 +6,8 @@ import controllers.GameController;
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
+import java.util.Objects;
 
 /*
 * cell press and release handler
@@ -24,6 +26,8 @@ public class CellPressAndReleaseHandler extends MouseAdapter {
     //attributes, thought about not including the status button but would have to do a call chain
     // through the controller or write a function in the controller which seems a little narrow for a function? idk
     private final GameController gameController;
+
+    private static final String MINE_PATH = "/images/mine.png";
 
     //constructor
     public CellPressAndReleaseHandler(GameController gameController){
@@ -58,6 +62,9 @@ public class CellPressAndReleaseHandler extends MouseAdapter {
             //TODO: this is where we want the game state to move to game over
             //
             if(this.getGameController().hasMine(row, col)){
+                URL url  = getClass().getResource(MINE_PATH);
+                ImageIcon image = new ImageIcon(Objects.requireNonNull(url));
+                source.setIcon(image);
                 this.getGameController().setDeadImageIcon();
                 this.getGameController().stopTimer();
                 this.getGameController().disableButtonBoard();
