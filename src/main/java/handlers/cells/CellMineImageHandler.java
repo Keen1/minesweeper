@@ -93,6 +93,7 @@ public class CellMineImageHandler extends MouseAdapter {
                     });
 
         }
+
     }
 
     //get the game controller
