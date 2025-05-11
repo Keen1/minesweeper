@@ -111,6 +111,7 @@ public class ScoreBoardPanel extends JPanel{
     public void resetTimer(){
         this.timer.restart();
         this.setSeconds(0);
+        this.updateSecondsLabel();
     }
 
     //update the seconds variable
