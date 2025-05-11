@@ -15,6 +15,7 @@ public class GameResetHandler implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event){
         this.getController().resetBoard();
+        this.getController().setSmilingImageIcon();
     }
 
     public GameController getController(){
