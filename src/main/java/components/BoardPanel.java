@@ -3,6 +3,10 @@ package components;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseMotionAdapter;
+
 /*
 * the board panel class
 * holds the "board" of the game, all the cells that may or may not contain mines
@@ -20,6 +24,9 @@ public class BoardPanel extends JPanel{
     //component variables
     private CellButton[][] cellButtons;
     private JPanel buttonPanel;
+    private JPanel glassPanel;
+
+    private JLayeredPane layeredPane;
 
     //default constructor
     public BoardPanel(){
@@ -49,10 +56,25 @@ public class BoardPanel extends JPanel{
             }
         }
 
-        add(this.getButtonPanel(), BorderLayout.CENTER);
+        this.getLayeredPane().add(this.getGlassPanel(), JLayeredPane.PALETTE_LAYER);
+        this.getLayeredPane().add(this.getButtonPanel(), JLayeredPane.DEFAULT_LAYER);
+
+        add(this.getLayeredPane(), BorderLayout.CENTER);
+
         setVisible(true);
 
 
+    }
+
+    public void disableButtonPanel(){
+        this.getGlassPanel().setVisible(true);
+    }
+    public void enableButtonPanel(){
+        this.getGlassPanel().setVisible(false);
+    }
+
+    public boolean isButtonPanelDisabled(){
+        return this.getGlassPanel().isVisible();
     }
 
 
@@ -64,6 +86,39 @@ public class BoardPanel extends JPanel{
         this.setBoardColumns(cols);
         this.setMineCount(mineCount);
         this.initCellButtons();
+    }
+
+    private void initLayeredPane(){
+        this.layeredPane = new JLayeredPane();
+        this.layeredPane.setLayout(new OverlayLayout(this.layeredPane));
+    }
+
+    public JLayeredPane getLayeredPane(){
+        if(this.layeredPane == null){
+            initLayeredPane();
+        }
+        return this.layeredPane;
+    }
+
+    private void initGlassPanel(){
+        this.glassPanel = new JPanel();
+        this.glassPanel.setOpaque(false);
+        this.glassPanel.setVisible(false);
+
+        this.glassPanel.addMouseListener(new MouseAdapter(){});
+        this.glassPanel.addMouseMotionListener(new MouseMotionAdapter(){});
+        this.glassPanel.addKeyListener(new KeyAdapter(){});
+        this.glassPanel.setFocusTraversalKeysEnabled(false);
+
+    }
+
+    public JPanel getGlassPanel(){
+
+        if(this.glassPanel == null){
+            initGlassPanel();
+        }
+
+        return this.glassPanel;
     }
 
     //initialize the button panel

@@ -36,34 +36,6 @@ public class GameController {
         registerStatusButtonHandler();
     }
 
-    //disable the board panel. TODO: Doesn't work as intended
-    public void disableBoardPanel(){
-        this.disablePanel(this.getBoardPanel());
-    }
-
-    //disable any panel and its components passed. TODO Doesn't work as intended
-    private void disablePanel(JPanel panel){
-        panel.setEnabled(false);
-        for(Component component : panel.getComponents()){
-            component.setEnabled(false);
-
-            if(component instanceof Container){
-                disableComponents((Container)component);
-            }
-        }
-    }
-
-    //disable any components associated with a container. TODO Doesn't work as intended
-    private void disableComponents(Container container){
-        for(Component component : container.getComponents()){
-            component.setEnabled(false);
-
-            if(component instanceof Container){
-                disableComponents((Container)component);
-            }
-        }
-    }
-
     public void resetBoard(){
         int rows = this.getBoardPanel().getBoardRows();
         int columns = this.getBoardPanel().getBoardColumns();
@@ -73,6 +45,13 @@ public class GameController {
         this.getGameFrame().changeBoardPanel(rows, columns, mineCount, dimension);
         this.getGameModel().resetBoard();
         this.resetTimer();
+    }
+
+    public void disableButtonBoard(){
+        this.getBoardPanel().disableButtonPanel();
+    }
+    public void enableButtonBoard(){
+        this.getBoardPanel().enableButtonPanel();
     }
 
     //set the difficulty of the gui and the model give nthe rows, columns, and mine count
@@ -111,6 +90,7 @@ public class GameController {
 
     public void resetTimer(){
         this.getScoreBoardPanel().resetTimer();
+        this.getScoreBoardPanel().stopTimer();
     }
 
     //update the timer for the scoreboard
