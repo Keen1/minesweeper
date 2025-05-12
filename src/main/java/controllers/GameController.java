@@ -85,6 +85,32 @@ public class GameController {
         }
     }
 
+    public void doFloodFill(int row, int col){
+
+        if(row < 0 || row >= this.getBoardPanel().getBoardRows() || col < 0 || col >= this.getBoardPanel().getBoardColumns()){
+            return;
+        }
+
+        CellButton cell = this.getBoardPanel().getCellButton(row, col);
+
+        if(cell.isLockSelected()){
+            return;
+        }
+        if(this.getGameModel().hasMine(row, col)){
+            return;
+        }
+
+        cell.doClick();
+        doFloodFill(row - 1, col);
+        doFloodFill(row - 1, col + 1);
+        doFloodFill(row, col - 1);
+        doFloodFill(row, col + 1);
+        doFloodFill(row + 1, col - 1);
+        doFloodFill(row + 1, col);
+        doFloodFill(row + 1, col + 1);
+
+    }
+
     public CellButton getCellButton(int row, int column){
         return this.getBoardPanel().getCellButton(row, column);
     }
