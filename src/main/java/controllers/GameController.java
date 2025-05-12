@@ -85,6 +85,7 @@ public class GameController {
         }
     }
 
+    //TODO: not functioning correctly
     public void doFloodFill(int row, int col){
 
         if(row < 0 || row >= this.getBoardPanel().getBoardRows() || col < 0 || col >= this.getBoardPanel().getBoardColumns()){
