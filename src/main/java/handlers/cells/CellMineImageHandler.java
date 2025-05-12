@@ -96,6 +96,31 @@ public class CellMineImageHandler extends MouseAdapter {
 
     }
 
+    public void flowFill(CellButton source, int row, int col){
+
+        if(row < 0 || row >= this.getGameController().getBoardPanel().getCellButtons().length
+            || col < 0 || col >= this.getGameController().getBoardPanel().getCellButtons()[row].length){
+            return;
+        }
+
+        if(source.isLockSelected()){
+            return;
+        }
+
+        if(this.getGameController().hasMine(row, col)){
+            return;
+        }
+
+
+
+        if(this.getGameController().getAdjacentMines(row, col) > 0){
+            return;
+        }
+
+
+
+    }
+
     //get the game controller
     public GameController getGameController(){
         return this.gameController;
