@@ -9,6 +9,7 @@ import java.awt.event.ItemListener;
 * JButton behavior through extension
 */
 public class CellButton extends JToggleButton {
+
     //attributes
     private final int row;
     private final int column;
@@ -37,11 +38,6 @@ public class CellButton extends JToggleButton {
         });
 
 
-    }
-
-    public void reset(){
-        lockSelected = false;
-        setSelected(false);
     }
 
     //get the row of the button
