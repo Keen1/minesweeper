@@ -47,9 +47,14 @@ public class CellButton extends JToggleButton {
     }
 
     public void loadImage(){
-        URL url = getClass().getResource(getImagePathString());
-        ImageIcon image = new ImageIcon(Objects.requireNonNull(url));
-        setIcon(image);
+        if(this.getImagePathString() != null &&!this.getImagePathString().isEmpty()){
+            URL url = getClass().getResource(getImagePathString());
+            ImageIcon image = new ImageIcon(Objects.requireNonNull(url));
+            SwingUtilities.invokeLater(() ->{
+                setIcon(image);
+            });
+        }
+
     }
 
 

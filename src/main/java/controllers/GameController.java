@@ -4,6 +4,7 @@ import components.BoardPanel;
 import components.CellButton;
 import components.GameFrame;
 import components.ScoreBoardPanel;
+import handlers.cells.CellClickHandler;
 import handlers.cells.CellMineImageHandler;
 import handlers.cells.CellPressAndReleaseHandler;
 import handlers.status.GameResetHandler;
@@ -81,9 +82,7 @@ public class GameController {
         JToggleButton[][] cellButtons = this.getBoardPanel().getCellButtons();
         for (JToggleButton[] cellRow : cellButtons) {
             for (JToggleButton cell : cellRow) {
-                cell.addMouseListener(new CellMineImageHandler(this));
-
-                cell.addMouseListener(new CellPressAndReleaseHandler(this));
+                cell.addMouseListener(new CellClickHandler(this));
             }
         }
     }
@@ -134,6 +133,10 @@ public class GameController {
 
     public void setCellButtonImageIcon(CellButton button, ImageIcon image){
         this.getBoardPanel().setCellImageIcon(button, image);
+    }
+
+    public void setFlagImageIcon(int row, int column){
+        this.getBoardPanel().setFlagIcon(row, column);
     }
 
     public void resetTimer(){

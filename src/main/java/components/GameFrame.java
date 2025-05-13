@@ -43,6 +43,7 @@ public class GameFrame extends JFrame {
     public GameFrame(){
         initGameController();
         initComponents();
+        this.getGameController().getBoardPanel().setImagePaths(this.getGameModel());
 
     }
 
@@ -61,6 +62,7 @@ public class GameFrame extends JFrame {
     //initialize the game controller
     private void initGameController(){
         this.gameController = new GameController(this, this.getBoardPanel(), this.getScoreBoardPanel(), this.getGameModel());
+
     }
 
     //get the game controller

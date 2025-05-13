@@ -62,6 +62,7 @@ public class CellPressAndReleaseHandler extends MouseAdapter {
             //TODO: this is where we want the game state to move to game over
             //
             if(this.getGameController().hasMine(row, col)){
+                source.loadImage();
                 URL url  = getClass().getResource(MINE_PATH);
                 ImageIcon image = new ImageIcon(Objects.requireNonNull(url));
                 source.setIcon(image);

@@ -2,6 +2,7 @@ package components;
 
 
 import models.GameModel;
+import utils.ImageIconPathVars;
 import utils.NumberIconPathVars;
 
 import javax.swing.*;
@@ -9,6 +10,8 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseMotionAdapter;
+import java.net.URL;
+import java.util.Objects;
 
 /*
 * the board panel class
@@ -74,10 +77,6 @@ public class BoardPanel extends JPanel{
     }
     public void enableButtonPanel(){
         this.getGlassPanel().setVisible(false);
-    }
-
-    public boolean isButtonPanelDisabled(){
-        return this.getGlassPanel().isVisible();
     }
 
 
@@ -151,15 +150,16 @@ public class BoardPanel extends JPanel{
     }
 
     public void setImagePaths(GameModel model){
-        String minePath = "/images/mine.png";
         for(int i = 0; i < this.getCellButtons().length; i++){
             for(int j = 0; j < this.getCellButtons()[i].length; j++){
 
                 if(model.hasMine(i, j)){
-                    this.getCellButton(i, j).setImagePathString(minePath);
+                    this.getCellButton(i, j).setImagePathString(ImageIconPathVars.getPathFromCode("mine"));
 
                 }else if(model.getAdjacentMinesCount(i, j) > 0){
-                    this.getCellButton(i, j).setImagePathString(NumberIconPathVars.getPathFromInt(model.getAdjacentMinesCount(i, j)));
+                    int mineCount = model.getAdjacentMinesCount(i, j);
+                    String imagePath = NumberIconPathVars.getPathFromInt(mineCount);
+                    this.getCellButton(i, j).setImagePathString(imagePath);
 
                 }
             }
@@ -188,6 +188,12 @@ public class BoardPanel extends JPanel{
     //set the cell button's image icon
     public void setCellImageIcon(CellButton button, ImageIcon icon){
         button.setIcon(icon);
+    }
+
+    public void setFlagIcon(int row, int col){
+        URL url = getClass().getResource(ImageIconPathVars.getPathFromCode("flag"));
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(url));
+        this.getCellButton(row, col).setIcon(icon);
     }
 
     //set the mine count
