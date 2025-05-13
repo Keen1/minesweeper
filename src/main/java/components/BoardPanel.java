@@ -2,7 +2,7 @@ package components;
 
 
 import models.GameModel;
-import utils.PathVars;
+import utils.NumberIconPathVars;
 
 import javax.swing.*;
 import java.awt.*;
@@ -159,7 +159,7 @@ public class BoardPanel extends JPanel{
                     this.getCellButton(i, j).setImagePathString(minePath);
 
                 }else if(model.getAdjacentMinesCount(i, j) > 0){
-                    this.getCellButton(i, j).setImagePathString(PathVars.getPathFromInt(model.getAdjacentMinesCount(i, j)));
+                    this.getCellButton(i, j).setImagePathString(NumberIconPathVars.getPathFromInt(model.getAdjacentMinesCount(i, j)));
 
                 }
             }

@@ -2,7 +2,7 @@ package handlers.cells;
 
 import components.CellButton;
 import controllers.GameController;
-import utils.PathVars;
+import utils.NumberIconPathVars;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -77,7 +77,7 @@ public class CellMineImageHandler extends MouseAdapter {
                 int adjacentMines = this.getGameController().getAdjacentMines(row, column);
 
                 if (adjacentMines > 0) {
-                    String adjMineImgPath = PathVars.getPathFromInt(adjacentMines);
+                    String adjMineImgPath = NumberIconPathVars.getPathFromInt(adjacentMines);
                     url = getClass().getResource(adjMineImgPath);
                 }
 

@@ -3,7 +3,7 @@ package utils;
 * path vars enum
 * holds the image paths associated with their numeric symbol
 */
-public enum PathVars {
+public enum NumberIconPathVars {
     ONE(1, "/images/one.png"),
     TWO(2, "/images/two.png"),
     THREE(3, "/images/three.png"),
@@ -16,13 +16,13 @@ public enum PathVars {
     private final int code;
     private final String path;
 
-    PathVars(int code, String path){
+    NumberIconPathVars(int code, String path){
         this.code = code;
         this.path = path;
     }
 
     public static String getPathFromInt(int code){
-        for(PathVars path : PathVars.values()){
+        for(NumberIconPathVars path : NumberIconPathVars.values()){
             if(path.code == code){
                 return path.path;
             }
