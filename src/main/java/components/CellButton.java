@@ -17,6 +17,7 @@ public class CellButton extends JToggleButton {
     private final int column;
 
     private boolean lockSelected = false;
+    private boolean userFlagged = false;
 
     private String imagePathString;
 
@@ -66,6 +67,14 @@ public class CellButton extends JToggleButton {
     //bet the column of the button
     public int getColumn(){
         return this.column;
+    }
+
+    public boolean isUserFlagged(){
+        return this.userFlagged;
+    }
+
+    public void setUserFlagged(boolean userFlagged){
+        this.userFlagged = userFlagged;
     }
 
     public boolean isLockSelected(){

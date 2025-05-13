@@ -196,6 +196,14 @@ public class BoardPanel extends JPanel{
         this.getCellButton(row, col).setIcon(icon);
     }
 
+    public void setButtonIconToNull(int row, int col){
+        CellButton button = this.getCellButton(row, col);
+        button.setIcon(null);
+        button.revalidate();
+        button.repaint();
+
+    }
+
     //set the mine count
     public void setMineCount(int mineCount){
         this.mineCount = mineCount;

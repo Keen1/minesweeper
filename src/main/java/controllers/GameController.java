@@ -85,6 +85,10 @@ public class GameController {
         }
     }
 
+    public void setCellButtonImageToNull(int row, int col){
+        this.getBoardPanel().setButtonIconToNull(row, col);
+    }
+
     //TODO: not functioning correctly
     public void doFloodFill(int row, int col){
 

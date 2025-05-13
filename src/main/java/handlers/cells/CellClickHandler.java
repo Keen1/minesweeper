@@ -56,22 +56,35 @@ public class CellClickHandler extends MouseAdapter {
 
         if(SwingUtilities.isRightMouseButton(event)){
 
-            this.getGameController().setFlagImageIcon(row, col);
+            if(source.isUserFlagged()){
+
+                source.setUserFlagged(false);
+                this.getGameController().setCellButtonImageToNull(row, col);
+            }else{
+                this.getGameController().setFlagImageIcon(row, col);
+                source.setUserFlagged(true);
+
+            }
+
 
         }else{
+            if(!source.isUserFlagged()){
 
-            source.loadImage();
+                source.loadImage();
 
-            if(this.getGameController().hasMine(row, col)){
+                if(this.getGameController().hasMine(row, col)){
 
-                this.getGameController().setDeadImageIcon();
-                this.getGameController().stopTimer();
-                this.getGameController().disableButtonBoard();
+                    this.getGameController().setDeadImageIcon();
+                    this.getGameController().stopTimer();
+                    this.getGameController().disableButtonBoard();
 
-            }else{
+                }else{
 
-                this.getGameController().setSmilingImageIcon();
+                    this.getGameController().setSmilingImageIcon();
+                }
             }
+
+
         }
     }
 
