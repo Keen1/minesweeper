@@ -1,6 +1,9 @@
 package components;
 
 
+import models.GameModel;
+import utils.PathVars;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -143,6 +146,22 @@ public class BoardPanel extends JPanel{
                 this.cellButtons[i][j].setPreferredSize(CELL_DIM);
                 this.cellButtons[i][j].setMinimumSize(CELL_DIM);
 
+            }
+        }
+    }
+
+    public void setImagePaths(GameModel model){
+        String minePath = "/images/mine.png";
+        for(int i = 0; i < this.getCellButtons().length; i++){
+            for(int j = 0; j < this.getCellButtons()[i].length; j++){
+
+                if(model.hasMine(i, j)){
+                    this.getCellButton(i, j).setImagePathString(minePath);
+
+                }else if(model.getAdjacentMinesCount(i, j) > 0){
+                    this.getCellButton(i, j).setImagePathString(PathVars.getPathFromInt(model.getAdjacentMinesCount(i, j)));
+
+                }
             }
         }
     }

@@ -42,8 +42,9 @@ public class GameController {
         int mineCount = this.getBoardPanel().getMineCount();
         Dimension dimension = this.getGameFrame().getSize();
 
-        this.getGameFrame().changeBoardPanel(rows, columns, mineCount, dimension);
         this.getGameModel().resetBoard();
+        this.getGameFrame().changeBoardPanel(rows, columns, mineCount, dimension);
+        this.setCellButtonImagePaths();
         this.resetTimer();
     }
 
@@ -58,11 +59,13 @@ public class GameController {
     public void setModelDifficulty(int row, int col, int mineCount){
         this.getGameModel().resetBoard(row, col, mineCount);
         this.getBoardPanel().changeBoardSize(row, col, mineCount);
+        this.getBoardPanel().setImagePaths(this.getGameModel());
     }
 
     //set the new frame board panel
     public void setFrameBoardPanel(int row, int col, int mineCount, Dimension dimension){
         this.getGameFrame().changeBoardPanel(row, col, mineCount, dimension);
+        this.getBoardPanel().setImagePaths(this.getGameModel());
     }
 
     public void registerStatusButtonHandler(){
@@ -102,14 +105,27 @@ public class GameController {
         }
 
         cell.doClick();
-        doFloodFill(row - 1, col);
-        doFloodFill(row - 1, col + 1);
-        doFloodFill(row, col - 1);
-        doFloodFill(row, col + 1);
-        doFloodFill(row + 1, col - 1);
-        doFloodFill(row + 1, col);
-        doFloodFill(row + 1, col + 1);
 
+
+        int adjacentMines = this.getAdjacentMines(row, col);
+
+        if(adjacentMines == 0){
+            doFloodFill(row - 1, col - 1);
+            doFloodFill(row - 1, col);
+            doFloodFill(row - 1, col + 1);
+            doFloodFill(row, col - 1);
+            doFloodFill(row, col + 1);
+            doFloodFill(row + 1, col - 1);
+            doFloodFill(row + 1, col);
+            doFloodFill(row + 1, col + 1);
+        }
+
+
+
+    }
+
+    public void setCellButtonImagePaths(){
+        this.getBoardPanel().setImagePaths(this.getGameModel());
     }
 
     public CellButton getCellButton(int row, int column){

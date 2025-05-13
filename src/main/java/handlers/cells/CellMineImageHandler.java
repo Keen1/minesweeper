@@ -55,6 +55,7 @@ public class CellMineImageHandler extends MouseAdapter {
         int row = source.getRow();
         int column = source.getColumn();
 
+
         URL url = null;
         ImageIcon image;
         //check if the click was a left or right click to determine if user was setting a flag
@@ -94,7 +95,7 @@ public class CellMineImageHandler extends MouseAdapter {
 
         }
 
-        this.getGameController().doFloodFill(row - 1, column - 1);
+        this.getGameController().doFloodFill(row , column );
     }
 
     //get the game controller
