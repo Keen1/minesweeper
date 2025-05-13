@@ -5,8 +5,6 @@ import components.CellButton;
 import components.GameFrame;
 import components.ScoreBoardPanel;
 import handlers.cells.CellClickHandler;
-import handlers.cells.CellMineImageHandler;
-import handlers.cells.CellPressAndReleaseHandler;
 import handlers.status.GameResetHandler;
 import handlers.timer.TimerUpdateHandler;
 import models.GameModel;
