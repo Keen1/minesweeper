@@ -120,19 +120,6 @@ public class GameFrame extends JFrame {
 
     }
 
-    //get the difficulty group
-    public ButtonGroup getDifficultyGroup(){
-
-        if(this.difficultyGroup == null){
-
-            initDifficultyGroup();
-
-        }
-
-        return this.difficultyGroup;
-
-    }
-
     //initialize the expert difficulty menu item
     private void initExpertDifficultyMenuItem(){
 
