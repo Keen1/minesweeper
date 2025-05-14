@@ -10,26 +10,12 @@ import java.awt.event.ActionListener;
 * updates the timer label every 1000ms (1sec) as defined by the timer instantiated in the scoreboard panel
 */
 
-public class TimerUpdateHandler implements ActionListener {
-
-    //attributes
-    private final GameController gameController;
-
-    //constructor
-    public TimerUpdateHandler(GameController gameController){
-        this.gameController = gameController;
-    }
-
+public record TimerUpdateHandler(GameController gameController) implements ActionListener {
 
     //every tick of the timer call the update function in the controller
     @Override
-    public void actionPerformed(ActionEvent event){
-        this.getGameController().updateTimer();
-    }
-
-    //get the controller
-    public GameController getGameController(){
-        return this.gameController;
+    public void actionPerformed(ActionEvent event) {
+        this.gameController().updateTimer();
     }
 
 }
