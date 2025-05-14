@@ -45,44 +45,60 @@ public class CellClickHandler extends MouseAdapter {
     @Override
     public void mouseReleased(MouseEvent event){
 
+        //check if the timer is started
         if(!this.hasTimeStarted()){
+
             setTimeStarted(true);
             this.getGameController().startTimer();
+
         }
 
+        //get the source button for the event and its corresponding row and column
         CellButton source = (CellButton)event.getSource();
         int row = source.getRow();
         int col = source.getColumn();
 
+        //check if the user is setting or removing a flag
         if(SwingUtilities.isRightMouseButton(event)){
 
+            //if the button is flagged the user is removing the flag
             if(source.isUserFlagged()){
 
+                //set flag booleans to false and update the button image
                 source.setUserFlagged(false);
                 this.getGameController().setUserFlag(row, col, false);
                 this.getGameController().setCellButtonImageToNull(row, col);
+
+            //the button is not flagged and the user is adding a flag
             }else{
-                this.getGameController().setFlagImageIcon(row, col);
+
+                //set the flag booleans to true and update the button image
                 source.setUserFlagged(true);
                 this.getGameController().setUserFlag(row, col, true);
+                this.getGameController().setFlagImageIcon(row, col);
 
             }
 
-
+        //left click means user wants to reveal the cell
         }else{
+
+            //don't reveal the cell if the user has flagged it
             if(!source.isUserFlagged()){
 
+                //load the button's image
                 source.loadImage();
 
+                //check for mine
                 if(this.getGameController().hasMine(row, col)){
-
+                    //game is over, set status button icon, stop timer, and disable the button board
                     this.getGameController().setDeadImageIcon();
                     this.getGameController().stopTimer();
                     this.getGameController().disableButtonBoard();
 
                 }else{
-
+                    //update the status icon
                     this.getGameController().setSmilingImageIcon();
+                    //TODO: call flood fill function here
                 }
             }
 
