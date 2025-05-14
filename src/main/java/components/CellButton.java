@@ -12,13 +12,15 @@ import java.util.Objects;
 */
 public class CellButton extends JToggleButton {
 
-    //attributes
+    //variables for row and column
     private final int row;
     private final int column;
 
+    //boolean vars for locking the selection status of a cell button and the status of a user flag
     private boolean lockSelected = false;
     private boolean userFlagged = false;
 
+    //each button gets a string for its corresponding image
     private String imagePathString;
 
     //constructor
@@ -31,23 +33,19 @@ public class CellButton extends JToggleButton {
 
     }
 
-
-    public CellButton(int row, int column, String imagePathString){
-        this.row = row;
-        this.column = column;
-        this.imagePathString = imagePathString;
-        setSelectionBehavior();
-    }
-
+    //get the image path string
     public String getImagePathString(){
         return this.imagePathString;
     }
 
+    //set the image path string
     public void setImagePathString(String imagePathString){
         this.imagePathString = imagePathString;
     }
 
+    //load the corresponding image to the button
     public void loadImage(){
+
         if(this.getImagePathString() != null &&!this.getImagePathString().isEmpty()){
             URL url = getClass().getResource(getImagePathString());
             ImageIcon image = new ImageIcon(Objects.requireNonNull(url));
@@ -69,23 +67,29 @@ public class CellButton extends JToggleButton {
         return this.column;
     }
 
+    //get boolean to determine if the cell is flagged by the user
     public boolean isUserFlagged(){
         return this.userFlagged;
     }
 
+    //set the user flag for the cell
     public void setUserFlagged(boolean userFlagged){
         this.userFlagged = userFlagged;
     }
 
+    //get the boolean to determine if the cell is lock selected
     public boolean isLockSelected(){
         return this.lockSelected;
     }
 
+    //set the lock selected boolean
     public void setLockSelected(boolean lockSelected){
         this.lockSelected = lockSelected;
     }
 
+    //set the selection behavior for the button.
     private void setSelectionBehavior(){
+
         addItemListener(new ItemListener(){
             @Override
             public void itemStateChanged(ItemEvent e){
