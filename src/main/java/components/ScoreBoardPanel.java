@@ -20,7 +20,7 @@ public class ScoreBoardPanel extends JPanel{
     private static final String SURPRISED_FACE_PATH = "/images/surprised_face.png";
 
     //components
-    private JLabel minesRemainingLabel;
+    private JLabel minesFlaggedLabel;
     private JLabel secondsLabel;
     private JButton gameStatusButton;
 
@@ -44,7 +44,7 @@ public class ScoreBoardPanel extends JPanel{
         JPanel buttonWrapperPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonWrapperPanel.add(getGameStatusButton());
         add(buttonWrapperPanel, BorderLayout.CENTER);
-        add(getMinesRemainingLabel(), BorderLayout.WEST);
+        add(getMinesFlaggedLabel(), BorderLayout.WEST);
 
         setVisible(true);
 
@@ -152,19 +152,24 @@ public class ScoreBoardPanel extends JPanel{
         return this.secondsLabel;
     }
 
+    public void updateMinesFlaggedLabel(String text){
+        this.getMinesFlaggedLabel().setText(text);
+    }
+
+
     //init the mines remaining label
-    private void initMinesRemainingLabel(){
-        this.minesRemainingLabel = new JLabel("0");
-        this.minesRemainingLabel.setBorder(new EmptyBorder(0,25,0,0));
+    private void initMinesFlaggedLabel(){
+        this.minesFlaggedLabel = new JLabel("0");
+        this.minesFlaggedLabel.setBorder(new EmptyBorder(0,25,0,0));
 
     }
 
     //get the mines remaining label
-    public JLabel getMinesRemainingLabel(){
-        if(this.minesRemainingLabel == null){
-            initMinesRemainingLabel();
+    public JLabel getMinesFlaggedLabel(){
+        if(this.minesFlaggedLabel == null){
+            initMinesFlaggedLabel();
         }
-        return this.minesRemainingLabel;
+        return this.minesFlaggedLabel;
     }
 
     //init the game status button

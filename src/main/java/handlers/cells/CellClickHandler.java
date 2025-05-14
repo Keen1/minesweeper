@@ -78,6 +78,8 @@ public class CellClickHandler extends MouseAdapter {
                 this.getGameController().setFlagImageIcon(row, col);
 
             }
+            this.getGameController().updateFlagCounts();
+            this.getGameController().updateMinesFlaggedLabel();
 
         //left click means user wants to reveal the cell
         }else{
@@ -115,6 +117,9 @@ public class CellClickHandler extends MouseAdapter {
 
 
         }
+
+
+
     }
 
     private void floodFillFrom(int row, int col){

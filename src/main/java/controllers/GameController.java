@@ -45,6 +45,8 @@ public class GameController {
         this.getGameFrame().changeBoardPanel(rows, columns, mineCount, dimension);
         this.setCellButtonImagePaths();
         this.resetTimer();
+        this.updateFlagCounts();
+        this.updateMinesFlaggedLabel();
     }
 
     public void disableButtonBoard(){
@@ -87,6 +89,17 @@ public class GameController {
 
     public void setCellButtonImageToNull(int row, int col){
         this.getBoardPanel().setButtonIconToNull(row, col);
+    }
+
+    public void updateFlagCounts(){
+        this.getGameModel().updateFlaggedCount();
+        this.getGameModel().updateUnflaggedMineCount();
+
+    }
+
+    public void updateMinesFlaggedLabel(){
+        int minesFlagged = this.getGameModel().getFlaggedCount();
+        this.getScoreBoardPanel().updateMinesFlaggedLabel(Integer.toString(minesFlagged));
     }
 
 

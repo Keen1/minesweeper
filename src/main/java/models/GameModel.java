@@ -40,7 +40,7 @@ public class GameModel {
     //update the count for the current number of flagged cells
     public void updateFlaggedCount(){
 
-        int flagged = this.getFlaggedCount();
+        int flagged = 0;
         for(int i = 0; i < this.getBoard().getCells().length; i++){
             for(int j = 0; j < this.getBoard().getCells()[i].length; j++){
                 if(this.getBoard().getCells()[i][j].hasUserFlag()){
@@ -53,7 +53,7 @@ public class GameModel {
 
     //update the count for the current number of mines not flagged by the user
     public void updateUnflaggedMineCount(){
-        int unflaggedMines = this.getUnflaggedMineCount();
+        int unflaggedMines = 0;
         for(int i = 0; i < this.getBoard().getCells().length; i++){
             for(int j = 0; j < this.getBoard().getCells()[i].length; j++){
                 if(this.getBoard().getCells()[i][j].hasMine() && !this.getBoard().getCells()[i][j].hasUserFlag()){
