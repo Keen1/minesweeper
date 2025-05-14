@@ -49,6 +49,14 @@ public class GameController {
         this.updateMinesFlaggedLabel();
     }
 
+    public void checkWinStatus(){
+        if(this.isGameWon()){
+            this.stopTimer();
+            this.disableButtonBoard();
+            this.getScoreBoardPanel().setSunglassesFaceIcon();
+        }
+    }
+
     public void disableButtonBoard(){
         this.getBoardPanel().disableButtonPanel();
     }
@@ -67,6 +75,10 @@ public class GameController {
     public void setFrameBoardPanel(int row, int col, int mineCount, Dimension dimension){
         this.getGameFrame().changeBoardPanel(row, col, mineCount, dimension);
         this.getBoardPanel().setImagePaths(this.getGameModel());
+    }
+
+    public boolean isGameWon(){
+        return this.getGameModel().isGameWon();
     }
 
     public void registerStatusButtonHandler(){
@@ -94,6 +106,7 @@ public class GameController {
     public void updateFlagCounts(){
         this.getGameModel().updateFlaggedCount();
         this.getGameModel().updateUnflaggedMineCount();
+        this.getGameModel().updateMinesFlaggedCount();
 
     }
 

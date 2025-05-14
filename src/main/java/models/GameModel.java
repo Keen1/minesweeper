@@ -11,6 +11,7 @@ public class GameModel {
     private int flaggedCount;
     private int mineCount;
     private int unflaggedMineCount;
+    private int minesFlaggedCount;
 
     private static final int DEFAULT_ROWS = 9;
     private static final int DEFAULT_COLS = 9;
@@ -33,6 +34,26 @@ public class GameModel {
         this.setMines();
 
     }
+
+    public boolean isGameWon(){
+        return this.getMinesFlaggedCount() == this.getMineCount();
+    }
+
+    public void updateMinesFlaggedCount(){
+        int flagged = 0;
+        for(int i = 0; i < this.getBoard().getCells().length; i++){
+            for(int j = 0; j < this.getBoard().getCells()[i].length; j++){
+                if(this.getBoard().getCell(i, j).hasUserFlag() && this.getBoard().getCell(i, j).hasMine()){
+                    flagged++;
+                }
+            }
+        }
+
+        this.setMinesFlaggedCount(flagged);
+
+    }
+
+
 
 
 
@@ -188,6 +209,14 @@ public class GameModel {
     //set the game board
     public void setBoard(Board board){
         this.board = board;
+    }
+
+    public void setMinesFlaggedCount(int minesFlaggedCount){
+        this.minesFlaggedCount = minesFlaggedCount;
+    }
+
+    public int getMinesFlaggedCount(){
+        return this.minesFlaggedCount;
     }
 
     //set the flagged count

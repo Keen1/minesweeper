@@ -80,6 +80,8 @@ public class CellClickHandler extends MouseAdapter {
             }
             this.getGameController().updateFlagCounts();
             this.getGameController().updateMinesFlaggedLabel();
+            this.getGameController().checkWinStatus();
+
 
         //left click means user wants to reveal the cell
         }else{

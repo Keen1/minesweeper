@@ -68,6 +68,12 @@ public class ScoreBoardPanel extends JPanel{
 
     }
 
+    public void setSunglassesFaceIcon(){
+        URL url = getClass().getResource(SUNGLASSES_FACE_PATH);
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(url));
+        this.getGameStatusButton().setIcon(icon);
+    }
+
     //set the icon for the game status button to the smiling face icon
     public void setSurprisedFaceIcon(){
 
