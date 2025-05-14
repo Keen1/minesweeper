@@ -89,44 +89,6 @@ public class GameController {
         this.getBoardPanel().setButtonIconToNull(row, col);
     }
 
-    //TODO: not functioning correctly
-    public void doFloodFill(int row, int col){
-
-        if(row < 0 || row >= this.getBoardPanel().getBoardRows() ||
-            col < 0 || col >= this.getBoardPanel().getBoardColumns()){
-            return;
-        }
-
-        CellButton cell = this.getBoardPanel().getCellButton(row, col);
-        if(cell.isSelected()){
-            return;
-        }
-
-        if(this.getGameModel().hasUserFlag(row, col)){
-            return;
-        }
-
-        if(this.getGameModel().hasMine(row, col)){
-            return;
-        }
-
-        cell.setSelected(true);
-        cell.setLockSelected(true);
-        cell.loadImage();
-        int adjacentMines = this.getAdjacentMines(row, col);
-
-        if(adjacentMines == 0){
-            doFloodFill(row - 1, col - 1);
-            doFloodFill(row - 1, col);
-            doFloodFill(row - 1, col + 1);
-            doFloodFill(row, col - 1);
-            doFloodFill(row, col + 1);
-            doFloodFill(row + 1, col - 1);
-            doFloodFill(row + 1, col);
-            doFloodFill(row + 1, col + 1);
-        }
-
-    }
 
     public int getBoardPanelRows(){
         return this.getBoardPanel().getBoardRows();

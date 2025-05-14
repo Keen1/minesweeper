@@ -96,12 +96,18 @@ public class CellClickHandler extends MouseAdapter {
                     this.getGameController().disableButtonBoard();
 
                 }else{
+                    if(this.getGameController().getAdjacentMines(row, col) == 0){
+                        for(int i = row - 1; i <= row + 1; i++){
+                            for(int j = col - 1; j <= col + 1; j++){
+                                if(i == row && j == col){
+                                    continue;
+                                }
+                                floodFillFrom(i, j);
+                            }
+                        }
+                    }
                     //update the status icon
                     this.getGameController().setSmilingImageIcon();
-
-                    if(this.getGameController().getAdjacentMines(row, col) == 0){
-                        this.floodFillFrom(row, col);
-                    }
 
 
                 }
@@ -112,6 +118,22 @@ public class CellClickHandler extends MouseAdapter {
     }
 
     private void floodFillFrom(int row, int col){
+        if(row < 0 || row >= this.getGameController().getBoardPanelRows() ||
+            col < 0 || col >= this.getGameController().getBoardPanelColumns()){
+            return;
+        }
+        CellButton currentCell = this.getGameController().getCellButton(row, col);
+
+        if(currentCell.isSelected() || currentCell.isUserFlagged() || this.getGameController().hasMine(row, col)){
+            return;
+        }
+
+        currentCell.setSelected(true);
+        currentCell.loadImage();
+
+        if(this.getGameController().getAdjacentMines(row, col ) > 0){
+            return;
+        }
 
         for(int i = row - 1; i <= row + 1; i++){
             for(int j = col - 1; j <= col + 1; j++){
@@ -120,17 +142,7 @@ public class CellClickHandler extends MouseAdapter {
                     continue;
                 }
 
-                if(i < 0 || i >= this.getGameController().getBoardPanelRows() ||
-                    j < 0 || j >= this.getGameController().getBoardPanelColumns()){
-                    continue;
-                }
-
-
-                CellButton neighbor = this.getGameController().getCellButton(i, j);
-
-                if(!neighbor.isSelected() && !neighbor.isUserFlagged() && !this.getGameController().hasMine(i, j)){
-                    neighbor.doClick();
-                }
+                floodFillFrom(i, j);
 
             }
         }
