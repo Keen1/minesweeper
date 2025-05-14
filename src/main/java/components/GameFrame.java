@@ -67,9 +67,13 @@ public class GameFrame extends JFrame {
 
     //get the game controller
     public GameController getGameController(){
+
         if(this.gameController == null){
+
             initGameController();
+
         }
+
         return this.gameController;
     }
 
@@ -80,10 +84,15 @@ public class GameFrame extends JFrame {
 
     //get the game model
     public GameModel getGameModel(){
+
         if(this.gameModel == null){
+
             initGameModel();
+
         }
+
         return gameModel;
+
     }
 
     //show the frame
@@ -93,44 +102,61 @@ public class GameFrame extends JFrame {
 
     //initialize the frame's attributes
     private void initFrameAttributes(){
+
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setPreferredSize(BEGINNER_DIM);
         setLayout(new BorderLayout());
+
     }
 
     //init the difficulty group
     private void initDifficultyGroup(){
+
         this.difficultyGroup = new ButtonGroup();
         this.difficultyGroup.add(getBeginnerDifficultyMenuItem());
         this.difficultyGroup.add(getIntermediateDifficultyMenuItem());
         this.difficultyGroup.add(getExpertDifficultyMenuItem());
         this.getBeginnerDifficultyMenuItem().setSelected(true);
+
     }
 
     //get the difficulty group
     public ButtonGroup getDifficultyGroup(){
+
         if(this.difficultyGroup == null){
+
             initDifficultyGroup();
+
         }
+
         return this.difficultyGroup;
+
     }
 
     //initialize the expert difficulty menu item
     private void initExpertDifficultyMenuItem(){
+
         this.expertDifficultyMenuItem = new JCheckBoxMenuItem("expert");
         this.expertDifficultyMenuItem.addActionListener(new DifficultyHandler(this.getGameController(), EXPERT_DIM, EXPERT_BOARD_ROWS, EXPERT_BOARD_COLUMMNS, EXPERT_BOARD_MINE_COUNT));
+
     }
 
     //get the expert difficulty menu item
     public JCheckBoxMenuItem getExpertDifficultyMenuItem(){
+
         if(this.expertDifficultyMenuItem == null){
+
             initExpertDifficultyMenuItem();
+
         }
+
         return this.expertDifficultyMenuItem;
+
     }
 
     //initialize the intermediate difficulty menu item
     private void initIntermediateDifficultyMenuItem(){
+
         this.intermediateDifficultyMenuItem = new JCheckBoxMenuItem("intermediate");
         this.intermediateDifficultyMenuItem.addActionListener(new DifficultyHandler(this.getGameController(), INTERMEDIATE_DIM, INTERMEDIATE_BOARD_ROWS, INTERMEDIATE_BOARD_COLUMNS, INTERMEDIATE_MINE_COUNT));
 
@@ -138,14 +164,20 @@ public class GameFrame extends JFrame {
 
     //get the intermediate difficulty menu item
     public JCheckBoxMenuItem getIntermediateDifficultyMenuItem(){
+
         if(this.intermediateDifficultyMenuItem == null){
+
             initIntermediateDifficultyMenuItem();
+
         }
+
         return this.intermediateDifficultyMenuItem;
+
     }
 
     //initialize the beginner difficulty menu item
     private void initBeginnerDifficultyMenuItem(){
+
         this.beginnerDifficultyMenuItem = new JCheckBoxMenuItem("beginner");
         this.beginnerDifficultyMenuItem.addActionListener(new DifficultyHandler(this.getGameController(), BEGINNER_DIM, DEFAULT_BOARD_ROWS, DEFAULT_BOARD_COLUMNS, DEFAULT_MINE_COUNT));
 
@@ -153,10 +185,15 @@ public class GameFrame extends JFrame {
 
     //get the beginner difficulty menu item
     public JCheckBoxMenuItem getBeginnerDifficultyMenuItem(){
+
         if(this.beginnerDifficultyMenuItem == null){
+
             initBeginnerDifficultyMenuItem();
+
         }
+
         return this.beginnerDifficultyMenuItem;
+
     }
 
     //initialize the difficulty menu
@@ -173,68 +210,102 @@ public class GameFrame extends JFrame {
 
     //get the difficulty menu
     public JMenu getDifficultyMenu(){
+
         if(this.difficultySubMenu == null){
+
             initDifficultyMenu();
+
         }
+
         return this.difficultySubMenu;
+
     }
 
     //initialize the settings menu
     private void initSettingsMenu(){
+
         this.settingsMenu = new JMenu("settings");
         this.settingsMenu.add(getDifficultyMenu());
+
     }
 
     //get the settings menu
     public JMenu getSettingsMenu(){
+
         if(this.settingsMenu == null){
+
             initSettingsMenu();
+
         }
+
         return this.settingsMenu;
+
     }
 
     //initialize the menu bar
     private void initMenuBar(){
+
         this.menuBar = new JMenuBar();
         this.menuBar.add(getSettingsMenu());
+
     }
 
     //get the menus
     public JMenuBar getMenus(){
+
         if(this.menuBar == null){
+
             initMenuBar();
+
         }
+
         return this.menuBar;
+
     }
 
     //init the scoreboard panel
     public void initScoreBoardPanel(){
+
         this.scoreBoardPanel = new ScoreBoardPanel();
+
     }
 
     //get the scoreboard panel
     public ScoreBoardPanel getScoreBoardPanel(){
+
         if(this.scoreBoardPanel == null){
+
             initScoreBoardPanel();
+
         }
+
         return this.scoreBoardPanel;
+
     }
 
     //init the board panel
     public void initBoardPanel(){
+
         this.boardPanel = new BoardPanel();
+
     }
 
     //set the board panel
     public void setBoardPanel(BoardPanel boardPanel){
+
         this.boardPanel = boardPanel;
+
     }
 
     //get the board panel
     public BoardPanel getBoardPanel(){
+
         if(this.boardPanel == null){
+
             initBoardPanel();
+
         }
+
         return this.boardPanel;
 
     }
@@ -246,6 +317,7 @@ public class GameFrame extends JFrame {
         BoardPanel currentBoardPanel = this.getBoardPanel();
         getContentPane().remove(currentBoardPanel);
         this.setBoardPanel(newBoardPanel);
+
         getContentPane().add(newBoardPanel, BorderLayout.CENTER);
         setPreferredSize(dimension);
 
