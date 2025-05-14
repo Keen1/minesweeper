@@ -16,16 +16,18 @@ import java.awt.*;
 * Game Controller
 * manages the state of the game and the gui front end
 */
+
 public class GameController {
 
     //front end components and back end model
-    private GameFrame gameFrame;
+    private final GameFrame gameFrame;
     private BoardPanel boardPanel;
-    private ScoreBoardPanel scoreBoardPanel;
-    private GameModel gameModel;
+    private final ScoreBoardPanel scoreBoardPanel;
+    private final GameModel gameModel;
 
     //constructor
     public GameController(GameFrame gameFrame, BoardPanel boardPanel, ScoreBoardPanel scoreBoardPanel, GameModel gameModel){
+
         this.gameFrame = gameFrame;
         this.boardPanel = boardPanel;
         this.scoreBoardPanel = scoreBoardPanel;
@@ -33,9 +35,12 @@ public class GameController {
         registerCellMouseHandlers();
         registerTimerHandler();
         registerStatusButtonHandler();
+
     }
 
+    //reset the board given the set parameters
     public void resetBoard(){
+
         int rows = this.getBoardPanel().getBoardRows();
         int columns = this.getBoardPanel().getBoardColumns();
         int mineCount = this.getBoardPanel().getMineCount();
@@ -49,52 +54,67 @@ public class GameController {
         this.updateMinesFlaggedLabel();
     }
 
+    //check the win status of the game
     public void checkWinStatus(){
+
         if(this.isGameWon()){
+
             this.setWinStatus();
+
         }
     }
 
+    //set the win status of the game
     public void setWinStatus(){
+
         this.stopTimer();
         this.disableButtonBoard();
         this.setSunglassesImageIcon();
+
     }
 
+    //set the lose status of the game
     public void setLoseStatus(){
+
         this.stopTimer();
         this.disableButtonBoard();
         this.setDeadImageIcon();
+
     }
 
+    //disable the button board on the board panel
     public void disableButtonBoard(){
         this.getBoardPanel().disableButtonPanel();
     }
-    public void enableButtonBoard(){
-        this.getBoardPanel().enableButtonPanel();
-    }
 
-    //set the difficulty of the gui and the model give nthe rows, columns, and mine count
+    //set the difficulty of the gui and the model given the rows, columns, and mine count
     public void setModelDifficulty(int row, int col, int mineCount){
+
         this.getGameModel().resetBoard(row, col, mineCount);
         this.getBoardPanel().changeBoardSize(row, col, mineCount);
         this.getBoardPanel().setImagePaths(this.getGameModel());
+
     }
 
     //set the new frame board panel
     public void setFrameBoardPanel(int row, int col, int mineCount, Dimension dimension){
+
         this.getGameFrame().changeBoardPanel(row, col, mineCount, dimension);
         this.getBoardPanel().setImagePaths(this.getGameModel());
+
     }
 
+    //check whether the game has been won or not
     public boolean isGameWon(){
         return this.getGameModel().isGameWon();
     }
 
+    //register the status button handler
     public void registerStatusButtonHandler(){
         this.getScoreBoardPanel().getGameStatusButton().addActionListener(new GameResetHandler(this));
     }
 
+    //register the timer handler
     public void registerTimerHandler(){
         this.getScoreBoardPanel().getTimer().addActionListener(new TimerUpdateHandler(this));
     }
@@ -109,10 +129,12 @@ public class GameController {
         }
     }
 
+    //set the image icon of a cell button to null
     public void setCellButtonImageToNull(int row, int col){
         this.getBoardPanel().setButtonIconToNull(row, col);
     }
 
+    //update the flag counts placed by the user
     public void updateFlagCounts(){
         this.getGameModel().updateFlaggedCount();
         this.getGameModel().updateUnflaggedMineCount();
@@ -120,35 +142,43 @@ public class GameController {
 
     }
 
+    //update the mines flagged label TODO: this might need to be a different name? Its not a minesFlagged label its just a counter for number of flags placed
     public void updateMinesFlaggedLabel(){
         int minesFlagged = this.getGameModel().getFlaggedCount();
         this.getScoreBoardPanel().updateMinesFlaggedLabel(Integer.toString(minesFlagged));
     }
 
-
+    //get the number of rows on the board panel
     public int getBoardPanelRows(){
         return this.getBoardPanel().getBoardRows();
     }
+
+    //get the number of columns on the board panel
     public int getBoardPanelColumns(){
         return this.getBoardPanel().getBoardColumns();
     }
 
+    //set the cell button image paths
     public void setCellButtonImagePaths(){
         this.getBoardPanel().setImagePaths(this.getGameModel());
     }
 
+    //get a cell button given a row and a column
     public CellButton getCellButton(int row, int column){
         return this.getBoardPanel().getCellButton(row, column);
     }
 
+    //set a given cell button's image icon
     public void setCellButtonImageIcon(CellButton button, ImageIcon image){
         this.getBoardPanel().setCellImageIcon(button, image);
     }
 
+    //set the flag image icon of a cell button given the row and column
     public void setFlagImageIcon(int row, int column){
         this.getBoardPanel().setFlagIcon(row, column);
     }
 
+    //reset the timer
     public void resetTimer(){
         this.getScoreBoardPanel().resetTimer();
         this.getScoreBoardPanel().stopTimer();
@@ -164,10 +194,12 @@ public class GameController {
         this.getScoreBoardPanel().startTimer();
     }
 
+    //stop the timer
     public void stopTimer(){
         this.getScoreBoardPanel().stopTimer();
     }
 
+    //set the sunglasses image icon on the status button
     public void setSunglassesImageIcon(){
         this.getScoreBoardPanel().setSunglassesFaceIcon();
     }
@@ -197,17 +229,9 @@ public class GameController {
         return this.getGameModel().hasMine(row, col);
     }
 
-    public boolean hasUserFlag(int row, int col){
-        return this.getGameModel().hasUserFlag(row, col);
-    }
+    //set the user flag for cell given a row and column
     public void setUserFlag(int row, int col, boolean userFlag){
         this.getGameModel().setUserFlag(row, col, userFlag);
-    }
-
-
-    //set the game frame
-    public void setGameFrame(GameFrame gameFrame){
-        this.gameFrame = gameFrame;
     }
 
     //get the game frame
@@ -226,19 +250,9 @@ public class GameController {
         return this.boardPanel;
     }
 
-    //set the scoreboard panel
-    public void setScoreBoardPanel(ScoreBoardPanel scoreBoardPanel){
-        this.scoreBoardPanel = scoreBoardPanel;
-    }
-
     //get the scoreboard panel
     public ScoreBoardPanel getScoreBoardPanel(){
         return this.scoreBoardPanel;
-    }
-
-    //set the game model
-    public void setGameModel(GameModel gameModel){
-        this.gameModel = gameModel;
     }
 
     //get the game model
