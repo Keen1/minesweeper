@@ -19,11 +19,12 @@ public class CellClickHandler extends MouseAdapter {
     private final GameController gameController;
 
     //time started variable to track timer status
-    private static boolean timeStarted = false;
+    private static boolean timeStarted;
 
     //constructor
     public CellClickHandler(GameController gameController){
         this.gameController = gameController;
+        timeStarted = false;
     }
 
     //override for mouse pressed

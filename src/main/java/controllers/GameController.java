@@ -11,6 +11,7 @@ import models.GameModel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 /*
 * Game Controller
@@ -50,6 +51,11 @@ public class GameController {
         this.getGameFrame().changeBoardPanel(rows, columns, mineCount, dimension);
         this.setCellButtonImagePaths();
         this.resetTimer();
+        ActionListener[] al = this.getScoreBoardPanel().getTimer().getActionListeners();
+        for(ActionListener listener : al){
+            System.out.printf(listener.getClass().toString());
+        }
+
         this.updateFlagCounts();
         this.updateMinesFlaggedLabel();
     }
@@ -66,7 +72,7 @@ public class GameController {
 
     //set the win status of the game
     public void setWinStatus(){
-
+        System.out.println("game won!!!!");
         this.stopTimer();
         this.disableButtonBoard();
         this.setSunglassesImageIcon();

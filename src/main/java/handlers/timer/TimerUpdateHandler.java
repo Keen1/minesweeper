@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 */
 public class TimerUpdateHandler implements ActionListener {
     private final GameController gameController;
+
     public TimerUpdateHandler(GameController gameController){
         this.gameController = gameController;
     }

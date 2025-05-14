@@ -40,8 +40,8 @@ public class GameModel {
     //update the number of mines that have been flagged
     public void updateMinesFlaggedCount(){
         int flagged = 0;
-        for(int i = 0; i < this.getBoard().cells().length; i++){
-            for(int j = 0; j < this.getBoard().cells()[i].length; j++){
+        for(int i = 0; i < this.getBoard().getCells().length; i++){
+            for(int j = 0; j < this.getBoard().getCells()[i].length; j++){
                 if(this.getBoard().getCell(i, j).hasUserFlag() && this.getBoard().getCell(i, j).hasMine()){
                     flagged++;
                 }
@@ -56,9 +56,9 @@ public class GameModel {
     public void updateFlaggedCount(){
 
         int flagged = 0;
-        for(int i = 0; i < this.getBoard().cells().length; i++){
-            for(int j = 0; j < this.getBoard().cells()[i].length; j++){
-                if(this.getBoard().cells()[i][j].hasUserFlag()){
+        for(int i = 0; i < this.getBoard().getCells().length; i++){
+            for(int j = 0; j < this.getBoard().getCells()[i].length; j++){
+                if(this.getBoard().getCells()[i][j].hasUserFlag()){
                     flagged++;
                 }
             }
@@ -79,10 +79,10 @@ public class GameModel {
 
                 int nextRow = rowOffset + row;
                 int nextCol = colOffset + col;
-                if(nextRow >= 0 && nextRow < this.getBoard().cells().length &&
-                        nextCol >=0 && nextCol < this.getBoard().cells()[nextRow].length){
+                if(nextRow >= 0 && nextRow < this.getBoard().getCells().length &&
+                        nextCol >=0 && nextCol < this.getBoard().getCells()[nextRow].length){
 
-                    if(this.getBoard().cells()[nextRow][nextCol].hasMine()){
+                    if(this.getBoard().getCells()[nextRow][nextCol].hasMine()){
                         count++;
                     }
 
@@ -100,8 +100,8 @@ public class GameModel {
 
             int count = this.getMineCount();
             SecureRandom secureRand = new SecureRandom();
-            int maxRows = this.getBoard().cells().length;
-            int maxCols = this.getBoard().cells()[maxRows -1].length;
+            int maxRows = this.getBoard().getCells().length;
+            int maxCols = this.getBoard().getCells()[maxRows -1].length;
 
             while(count > 0){
                 int randRow = secureRand.nextInt(maxRows);
@@ -120,8 +120,8 @@ public class GameModel {
     //reset the board with the current row and column conditions
     public void resetBoard(){
 
-        int row = this.getBoard().cells().length;
-        int col = this.getBoard().cells()[row - 1].length;
+        int row = this.getBoard().getCells().length;
+        int col = this.getBoard().getCells()[row - 1].length;
 
         Cell[][] cells = new Cell[row][col];
         Board board = new Board(cells);
