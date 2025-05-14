@@ -10,9 +10,9 @@ public class GameModel {
     private Board board;
     private int flaggedCount;
     private int mineCount;
-    private int unflaggedMineCount;
     private int minesFlaggedCount;
 
+    //default row, column, and mine variables
     private static final int DEFAULT_ROWS = 9;
     private static final int DEFAULT_COLS = 9;
     private static final int DEFAULT_MINES= 10;
@@ -20,9 +20,6 @@ public class GameModel {
     //constructors
     public GameModel(){
         initDefaultBoard();
-    }
-    public GameModel(Board board){
-        this.board = board;
     }
 
     //init the default board layout
@@ -35,10 +32,12 @@ public class GameModel {
 
     }
 
+    //check if the game is won
     public boolean isGameWon(){
         return this.getMinesFlaggedCount() == this.getMineCount();
     }
 
+    //update the number of mines that have been flagged
     public void updateMinesFlaggedCount(){
         int flagged = 0;
         for(int i = 0; i < this.getBoard().cells().length; i++){
@@ -53,11 +52,6 @@ public class GameModel {
 
     }
 
-
-
-
-
-
     //update the count for the current number of flagged cells
     public void updateFlaggedCount(){
 
@@ -70,19 +64,6 @@ public class GameModel {
             }
         }
         this.setFlaggedCount(flagged);
-    }
-
-    //update the count for the current number of mines not flagged by the user
-    public void updateUnflaggedMineCount(){
-        int unflaggedMines = 0;
-        for(int i = 0; i < this.getBoard().cells().length; i++){
-            for(int j = 0; j < this.getBoard().cells()[i].length; j++){
-                if(this.getBoard().cells()[i][j].hasMine() && !this.getBoard().cells()[i][j].hasUserFlag()){
-                    unflaggedMines++;
-                }
-            }
-        }
-        this.setUnflaggedMineCount(unflaggedMines);
     }
 
     //determine which cells adjacent to the specified cell have a mines
@@ -108,9 +89,8 @@ public class GameModel {
                 }
             }
         }
+
         return count;
-
-
     }
 
     //set a given number of mines on the board given a count
@@ -137,36 +117,12 @@ public class GameModel {
 
     }
 
-    //get the numbers of bombs that the user has yet to flag
-    public int getUnflaggedMinesRemaining(){
-
-        int unflaggedMines = 0;
-
-        for(int i = 0; i < this.getBoard().cells().length; i++){
-            for(int j = 0; j < this.getBoard().cells()[i].length; j++){
-                if(this.getBoard().getCell(i, j).hasMine() && !this.getBoard().getCell(i, j).hasUserFlag()){
-                    unflaggedMines++;
-                }
-            }
-        }
-
-        return unflaggedMines;
-    }
-
     //reset the board with the current row and column conditions
     public void resetBoard(){
 
         int row = this.getBoard().cells().length;
         int col = this.getBoard().cells()[row - 1].length;
 
-        Cell[][] cells = new Cell[row][col];
-        Board board = new Board(cells);
-        this.setBoard(board);
-        this.setMines();
-    }
-
-    //reset the board with new row and column conditions
-    public void resetBoard(int row, int col){
         Cell[][] cells = new Cell[row][col];
         Board board = new Board(cells);
         this.setBoard(board);
@@ -186,15 +142,6 @@ public class GameModel {
         return this.getBoard().getCell(row, col).hasMine();
     }
 
-    //get the flagged status of a particular cell
-    public boolean hasUserFlag(int row, int col){
-        return this.getBoard().getCell(row, col).hasUserFlag();
-    }
-
-    //set the mine status of a particular cell
-    public void setMine(int row, int col, boolean bomb){
-        this.getBoard().getCell(row, col).setMine(bomb);
-    }
 
     //set the flagged status of a particular cell
     public void setUserFlag(int row, int col, boolean userFlag){
@@ -239,15 +186,6 @@ public class GameModel {
         return this.mineCount;
     }
 
-    //set number of unflagged mines
-    public void setUnflaggedMineCount(int unflaggedBombCount){
-        this.unflaggedMineCount = unflaggedBombCount;
-    }
-
-    //get the number of unflagged mines
-    public int getUnflaggedMineCount(){
-        return this.unflaggedMineCount;
-    }
 
 
 
