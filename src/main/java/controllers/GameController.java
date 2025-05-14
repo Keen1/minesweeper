@@ -51,11 +51,6 @@ public class GameController {
         this.getGameFrame().changeBoardPanel(rows, columns, mineCount, dimension);
         this.setCellButtonImagePaths();
         this.resetTimer();
-        ActionListener[] al = this.getScoreBoardPanel().getTimer().getActionListeners();
-        for(ActionListener listener : al){
-            System.out.printf(listener.getClass().toString());
-        }
-
         this.updateFlagCounts();
         this.updateMinesFlaggedLabel();
     }
