@@ -59,10 +59,12 @@ public class CellClickHandler extends MouseAdapter {
             if(source.isUserFlagged()){
 
                 source.setUserFlagged(false);
+                this.getGameController().setUserFlag(row, col, false);
                 this.getGameController().setCellButtonImageToNull(row, col);
             }else{
                 this.getGameController().setFlagImageIcon(row, col);
                 source.setUserFlagged(true);
+                this.getGameController().setUserFlag(row, col, true);
 
             }
 

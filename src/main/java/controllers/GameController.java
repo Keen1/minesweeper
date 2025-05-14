@@ -185,6 +185,14 @@ public class GameController {
         return this.getGameModel().hasMine(row, col);
     }
 
+    public boolean hasUserFlag(int row, int col){
+        return this.getGameModel().hasUserFlag(row, col);
+    }
+    public void setUserFlag(int row, int col, boolean userFlag){
+        this.getGameModel().setUserFlag(row, col, userFlag);
+    }
+
+
     //set the game frame
     public void setGameFrame(GameFrame gameFrame){
         this.gameFrame = gameFrame;
