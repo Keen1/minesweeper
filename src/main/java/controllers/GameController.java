@@ -51,10 +51,20 @@ public class GameController {
 
     public void checkWinStatus(){
         if(this.isGameWon()){
-            this.stopTimer();
-            this.disableButtonBoard();
-            this.getScoreBoardPanel().setSunglassesFaceIcon();
+            this.setWinStatus();
         }
+    }
+
+    public void setWinStatus(){
+        this.stopTimer();
+        this.disableButtonBoard();
+        this.setSunglassesImageIcon();
+    }
+
+    public void setLoseStatus(){
+        this.stopTimer();
+        this.disableButtonBoard();
+        this.setDeadImageIcon();
     }
 
     public void disableButtonBoard(){
@@ -156,6 +166,10 @@ public class GameController {
 
     public void stopTimer(){
         this.getScoreBoardPanel().stopTimer();
+    }
+
+    public void setSunglassesImageIcon(){
+        this.getScoreBoardPanel().setSunglassesFaceIcon();
     }
 
     //set the surprised image icon on the status button

@@ -94,11 +94,8 @@ public class CellClickHandler extends MouseAdapter {
 
                 //check for mine
                 if(this.getGameController().hasMine(row, col)){
-                    //game is over, set status button icon, stop timer, and disable the button board
-                    this.getGameController().setDeadImageIcon();
-                    this.getGameController().stopTimer();
-                    this.getGameController().disableButtonBoard();
-
+                    //game is over, set the lose status in the controller
+                    this.getGameController().setLoseStatus();
                 }else{
                     if(this.getGameController().getAdjacentMines(row, col) == 0){
                         for(int i = row - 1; i <= row + 1; i++){
