@@ -18,12 +18,12 @@ public class CellClickHandler extends MouseAdapter {
     //controller attribute
     private final GameController gameController;
 
-    private static boolean timeStarted;
+    //time started variable to track timer status
+    private static boolean timeStarted = false;
 
     //constructor
     public CellClickHandler(GameController gameController){
         this.gameController = gameController;
-        timeStarted = false;
     }
 
     //override for mouse pressed
@@ -78,6 +78,8 @@ public class CellClickHandler extends MouseAdapter {
                 this.getGameController().setFlagImageIcon(row, col);
 
             }
+
+            //update the flag counts
             this.getGameController().updateFlagCounts();
             this.getGameController().updateMinesFlaggedLabel();
             this.getGameController().checkWinStatus();
@@ -94,19 +96,29 @@ public class CellClickHandler extends MouseAdapter {
 
                 //check for mine
                 if(this.getGameController().hasMine(row, col)){
+
                     //game is over, set the lose status in the controller
                     this.getGameController().setLoseStatus();
+
+                //do flood fill
                 }else{
+
+                    //if the clicked button has no adjacent minds iterate through the adjacent buttons and flood fill them
                     if(this.getGameController().getAdjacentMines(row, col) == 0){
+
                         for(int i = row - 1; i <= row + 1; i++){
                             for(int j = col - 1; j <= col + 1; j++){
+
+                                //if we are at the current button continue
                                 if(i == row && j == col){
                                     continue;
                                 }
+
                                 floodFillFrom(i, j);
                             }
                         }
                     }
+
                     //update the status icon
                     this.getGameController().setSmilingImageIcon();
 
@@ -121,24 +133,33 @@ public class CellClickHandler extends MouseAdapter {
 
     }
 
+    //run the flood fill algorithm from the given button
     private void floodFillFrom(int row, int col){
+
+        //check the bounds
         if(row < 0 || row >= this.getGameController().getBoardPanelRows() ||
             col < 0 || col >= this.getGameController().getBoardPanelColumns()){
             return;
         }
+
+        //get the current cell
         CellButton currentCell = this.getGameController().getCellButton(row, col);
 
+        //if the button is already selected, has a flag, or has a mine, don't show it
         if(currentCell.isSelected() || currentCell.isUserFlagged() || this.getGameController().hasMine(row, col)){
             return;
         }
 
+        //set the button's status to selected and load the button's image
         currentCell.setSelected(true);
         currentCell.loadImage();
 
+        //if the button has adjacent mines stop the flood fill
         if(this.getGameController().getAdjacentMines(row, col ) > 0){
             return;
         }
 
+        //flood fill for adjacent cells
         for(int i = row - 1; i <= row + 1; i++){
             for(int j = col - 1; j <= col + 1; j++){
 
@@ -157,10 +178,12 @@ public class CellClickHandler extends MouseAdapter {
         return this.gameController;
     }
 
+    //check if the timer has started
     public boolean hasTimeStarted(){
         return timeStarted;
     }
 
+    //set the timer status
     public void setTimeStarted(boolean b){
         timeStarted = b;
     }
