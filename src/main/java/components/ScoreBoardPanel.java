@@ -13,12 +13,11 @@ import java.util.Objects;
 
 public class ScoreBoardPanel extends JPanel{
 
-    //static paths for the status button icons
+    //static paths for the status button icons and static font size
     private static final String DEAD_FACE_PATH = "/images/dead_face.png";
     private static final String SMILING_FACE_PATH = "/images/smiling_face.png";
     private static final String SUNGLASSES_FACE_PATH = "/images/sunglasses_face.png";
     private static final String SURPRISED_FACE_PATH = "/images/surprised_face.png";
-
     private static final int LABEL_FONT_SIZE = 24;
 
     //components
@@ -30,12 +29,9 @@ public class ScoreBoardPanel extends JPanel{
     private Timer timer;
     private int seconds = 0;
 
-    private boolean gameOver;
-
     //constructor
     public ScoreBoardPanel(){
         initComponents();
-        this.gameOver = false;
     }
 
     //init the components of the panel
@@ -70,6 +66,7 @@ public class ScoreBoardPanel extends JPanel{
 
     }
 
+    //set the sunglasses face icon on the status button
     public void setSunglassesFaceIcon(){
         URL url = getClass().getResource(SUNGLASSES_FACE_PATH);
         ImageIcon icon = new ImageIcon(Objects.requireNonNull(url));
@@ -95,7 +92,6 @@ public class ScoreBoardPanel extends JPanel{
     }
 
     //load a specific image
-    //TODO -- do we need this? Where is this used and why?
     public ImageIcon loadImage(String path){
         URL imgURL = getClass().getResource(path);
         return new ImageIcon(Objects.requireNonNull(imgURL));
@@ -103,8 +99,6 @@ public class ScoreBoardPanel extends JPanel{
     }
     //init the timer
     private void initTimer(){
-        //TODO: update the action listener here instead of using null
-        // this is updated in the controller but it might be best to set the listener here?
         this.timer = new Timer(1000, null);
     }
 
@@ -116,6 +110,7 @@ public class ScoreBoardPanel extends JPanel{
         return this.timer;
     }
 
+    //reset the timer and seconds label
     public void resetTimer(){
         this.timer.restart();
         this.setSeconds(0);
@@ -147,6 +142,7 @@ public class ScoreBoardPanel extends JPanel{
 
     //init the seconds label
     private void initSecondsLabel(){
+
         this.secondsLabel = new JLabel("0");
         this.secondsLabel.setBorder(new EmptyBorder(0,25,0,25));
         this.secondsLabel.setOpaque(true);
@@ -206,13 +202,5 @@ public class ScoreBoardPanel extends JPanel{
             initGameStatusButton();
         }
         return this.gameStatusButton;
-    }
-
-    public void setGameOver(boolean gameOver){
-        this.gameOver = gameOver;
-    }
-
-    public boolean isGameOver(){
-        return this.gameOver;
     }
 }
