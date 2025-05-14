@@ -9,13 +9,6 @@ public class Cell {
     private boolean userFlag;
 
     //constructor
-    public Cell(){
-        this.mine = false;
-        this.userFlag = false;
-
-    }
-
-    //constructor
     public Cell(boolean mine, boolean userFlag){
         this.mine = mine;
         this.userFlag = userFlag;
