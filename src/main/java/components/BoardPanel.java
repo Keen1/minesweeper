@@ -72,15 +72,15 @@ public class BoardPanel extends JPanel{
 
     }
 
+    //disable the button panel via enabling the glass panel
     public void disableButtonPanel(){
         this.getGlassPanel().setVisible(true);
     }
+
+    //enable the button panel via disabling the glass panel
     public void enableButtonPanel(){
         this.getGlassPanel().setVisible(false);
     }
-
-
-
 
     //change the size of the board
     public void changeBoardSize(int rows, int cols, int mineCount){
@@ -90,11 +90,13 @@ public class BoardPanel extends JPanel{
         this.initCellButtons();
     }
 
+    //initialize the layered pane
     private void initLayeredPane(){
         this.layeredPane = new JLayeredPane();
         this.layeredPane.setLayout(new OverlayLayout(this.layeredPane));
     }
 
+    //get the layered pane
     public JLayeredPane getLayeredPane(){
         if(this.layeredPane == null){
             initLayeredPane();
@@ -102,6 +104,7 @@ public class BoardPanel extends JPanel{
         return this.layeredPane;
     }
 
+    //initialize the glass panel
     private void initGlassPanel(){
         this.glassPanel = new JPanel();
         this.glassPanel.setOpaque(false);
@@ -114,6 +117,7 @@ public class BoardPanel extends JPanel{
 
     }
 
+    //get the glass panel
     public JPanel getGlassPanel(){
 
         if(this.glassPanel == null){
@@ -164,11 +168,6 @@ public class BoardPanel extends JPanel{
                 }
             }
         }
-    }
-
-    //set the cell buttons
-    public void setCellButtons(CellButton[][] cellButtons){
-        this.cellButtons = cellButtons;
     }
 
     //get the cell buttons
