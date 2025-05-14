@@ -19,6 +19,8 @@ public class ScoreBoardPanel extends JPanel{
     private static final String SUNGLASSES_FACE_PATH = "/images/sunglasses_face.png";
     private static final String SURPRISED_FACE_PATH = "/images/surprised_face.png";
 
+    private static final int LABEL_FONT_SIZE = 24;
+
     //components
     private JLabel minesFlaggedLabel;
     private JLabel secondsLabel;
@@ -146,7 +148,12 @@ public class ScoreBoardPanel extends JPanel{
     //init the seconds label
     private void initSecondsLabel(){
         this.secondsLabel = new JLabel("0");
-        this.secondsLabel.setBorder(new EmptyBorder(0,0,0,25));
+        this.secondsLabel.setBorder(new EmptyBorder(0,25,0,25));
+        this.secondsLabel.setOpaque(true);
+        String name = this.secondsLabel.getFont().getName();
+        Font biggerFont = new Font(name, Font.BOLD, LABEL_FONT_SIZE);
+        this.secondsLabel.setFont(biggerFont);
+
 
     }
 
@@ -166,7 +173,11 @@ public class ScoreBoardPanel extends JPanel{
     //init the mines remaining label
     private void initMinesFlaggedLabel(){
         this.minesFlaggedLabel = new JLabel("0");
-        this.minesFlaggedLabel.setBorder(new EmptyBorder(0,25,0,0));
+        this.minesFlaggedLabel.setBorder(new EmptyBorder(0,25,0,25));
+        this.minesFlaggedLabel.setOpaque(true);
+        String name = this.minesFlaggedLabel.getFont().getName();
+        Font biggerFont = new Font(name, Font.BOLD, LABEL_FONT_SIZE);
+        this.minesFlaggedLabel.setFont(biggerFont);
 
     }
 
