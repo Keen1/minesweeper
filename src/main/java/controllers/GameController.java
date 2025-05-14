@@ -137,7 +137,6 @@ public class GameController {
     //update the flag counts placed by the user
     public void updateFlagCounts(){
         this.getGameModel().updateFlaggedCount();
-        this.getGameModel().updateUnflaggedMineCount();
         this.getGameModel().updateMinesFlaggedCount();
 
     }
@@ -166,11 +165,6 @@ public class GameController {
     //get a cell button given a row and a column
     public CellButton getCellButton(int row, int column){
         return this.getBoardPanel().getCellButton(row, column);
-    }
-
-    //set a given cell button's image icon
-    public void setCellButtonImageIcon(CellButton button, ImageIcon image){
-        this.getBoardPanel().setCellImageIcon(button, image);
     }
 
     //set the flag image icon of a cell button given the row and column
