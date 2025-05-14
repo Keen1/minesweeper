@@ -92,22 +92,27 @@ public class GameController {
     //TODO: not functioning correctly
     public void doFloodFill(int row, int col){
 
-        if(row < 0 || row >= this.getBoardPanel().getBoardRows() || col < 0 || col >= this.getBoardPanel().getBoardColumns()){
+        if(row < 0 || row >= this.getBoardPanel().getBoardRows() ||
+            col < 0 || col >= this.getBoardPanel().getBoardColumns()){
             return;
         }
 
         CellButton cell = this.getBoardPanel().getCellButton(row, col);
-
-        if(cell.isLockSelected()){
+        if(cell.isSelected()){
             return;
         }
+
+        if(this.getGameModel().hasUserFlag(row, col)){
+            return;
+        }
+
         if(this.getGameModel().hasMine(row, col)){
             return;
         }
 
-        cell.doClick();
-
-
+        cell.setSelected(true);
+        cell.setLockSelected(true);
+        cell.loadImage();
         int adjacentMines = this.getAdjacentMines(row, col);
 
         if(adjacentMines == 0){
@@ -121,8 +126,13 @@ public class GameController {
             doFloodFill(row + 1, col + 1);
         }
 
+    }
 
-
+    public int getBoardPanelRows(){
+        return this.getBoardPanel().getBoardRows();
+    }
+    public int getBoardPanelColumns(){
+        return this.getBoardPanel().getBoardColumns();
     }
 
     public void setCellButtonImagePaths(){

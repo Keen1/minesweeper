@@ -98,11 +98,41 @@ public class CellClickHandler extends MouseAdapter {
                 }else{
                     //update the status icon
                     this.getGameController().setSmilingImageIcon();
-                    //TODO: call flood fill function here
+
+                    if(this.getGameController().getAdjacentMines(row, col) == 0){
+                        this.floodFillFrom(row, col);
+                    }
+
+
                 }
             }
 
 
+        }
+    }
+
+    private void floodFillFrom(int row, int col){
+
+        for(int i = row - 1; i <= row + 1; i++){
+            for(int j = col - 1; j <= col + 1; j++){
+
+                if(i == row && j == col){
+                    continue;
+                }
+
+                if(i < 0 || i >= this.getGameController().getBoardPanelRows() ||
+                    j < 0 || j >= this.getGameController().getBoardPanelColumns()){
+                    continue;
+                }
+
+
+                CellButton neighbor = this.getGameController().getCellButton(i, j);
+
+                if(!neighbor.isSelected() && !neighbor.isUserFlagged() && !this.getGameController().hasMine(i, j)){
+                    neighbor.doClick();
+                }
+
+            }
         }
     }
 
