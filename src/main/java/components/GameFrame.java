@@ -23,7 +23,7 @@ public class GameFrame extends JFrame {
     private static final int INTERMEDIATE_BOARD_COLUMNS = 16;
     private static final int INTERMEDIATE_MINE_COUNT = 40;
     private static final int EXPERT_BOARD_ROWS = 30;
-    private static final int EXPERT_BOARD_COLUMMNS = 24;
+    private static final int EXPERT_BOARD_COLUMNS = 24;
     private static final int EXPERT_BOARD_MINE_COUNT = 99;
 
     //class objects
@@ -37,7 +37,6 @@ public class GameFrame extends JFrame {
     private JCheckBoxMenuItem beginnerDifficultyMenuItem;
     private JCheckBoxMenuItem intermediateDifficultyMenuItem;
     private JCheckBoxMenuItem expertDifficultyMenuItem;
-    private ButtonGroup difficultyGroup;
 
     //constructor
     public GameFrame(){
@@ -112,10 +111,10 @@ public class GameFrame extends JFrame {
     //init the difficulty group
     private void initDifficultyGroup(){
 
-        this.difficultyGroup = new ButtonGroup();
-        this.difficultyGroup.add(getBeginnerDifficultyMenuItem());
-        this.difficultyGroup.add(getIntermediateDifficultyMenuItem());
-        this.difficultyGroup.add(getExpertDifficultyMenuItem());
+        ButtonGroup difficultyGroup = new ButtonGroup();
+        difficultyGroup.add(getBeginnerDifficultyMenuItem());
+        difficultyGroup.add(getIntermediateDifficultyMenuItem());
+        difficultyGroup.add(getExpertDifficultyMenuItem());
         this.getBeginnerDifficultyMenuItem().setSelected(true);
 
     }
@@ -124,7 +123,7 @@ public class GameFrame extends JFrame {
     private void initExpertDifficultyMenuItem(){
 
         this.expertDifficultyMenuItem = new JCheckBoxMenuItem("expert");
-        this.expertDifficultyMenuItem.addActionListener(new DifficultyHandler(this.getGameController(), EXPERT_DIM, EXPERT_BOARD_ROWS, EXPERT_BOARD_COLUMMNS, EXPERT_BOARD_MINE_COUNT));
+        this.expertDifficultyMenuItem.addActionListener(new DifficultyHandler(this.getGameController(), EXPERT_DIM, EXPERT_BOARD_ROWS, EXPERT_BOARD_COLUMNS, EXPERT_BOARD_MINE_COUNT));
 
     }
 
