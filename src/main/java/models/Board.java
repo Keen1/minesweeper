@@ -27,4 +27,11 @@ public  class Board {
     public Cell[][] getCells(){
         return this.cells;
     }
+
+    public int getRowCount(){
+        return this.getCells().length;
+    }
+    public int getColumnCount(){
+        return this.getCells()[0].length;
+    }
 }

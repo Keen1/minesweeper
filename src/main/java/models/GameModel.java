@@ -186,6 +186,13 @@ public class GameModel {
         return this.mineCount;
     }
 
+    public int getBoardModelRows(){
+        return this.getBoard().getRowCount();
+    }
+    public int getBoardModelColumns(){
+        return this.getBoard().getColumnCount();
+    }
+
 
 
 
