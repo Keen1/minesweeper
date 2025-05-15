@@ -156,6 +156,11 @@ public class GameController {
         return this.getBoardPanel().getBoardColumns();
     }
 
+    //get the number of mines on the board panel
+    public int getBoardPanelMineCount(){
+        return this.getBoardPanel().getMineCount();
+    }
+
     //set the cell button image paths
     public void setCellButtonImagePaths(){
         this.getBoardPanel().setImagePaths(this.getGameModel());
