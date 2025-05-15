@@ -11,8 +11,6 @@ import models.GameModel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
-
 /*
 * Game Controller
 * manages the state of the game and the gui front end
