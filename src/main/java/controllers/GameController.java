@@ -67,7 +67,7 @@ public class GameController {
 
     //set the win status of the game
     public void setWinStatus(){
-        System.out.println("game won!!!!");
+        System.out.println("game won!!!!");//debug instruction TODO: remove upon complete testing
         this.stopTimer();
         this.disableButtonBoard();
         this.setSunglassesImageIcon();
