@@ -113,6 +113,15 @@ public class GameModelTest {
         assertEquals(INTERMEDIATE_MINES, flaggedMines);
     }
 
+    //test the expert win state with flagged mines count
+    @Test
+    public void testExpertWinStateFlaggedMinesCount(){
+        setExpertBoard();
+        setWinState();
+        int flaggedMines = gameModel.getMinesFlaggedCount();
+        assertEquals(EXPERT_MINES, flaggedMines);
+    }
+
     //test the default false win state with the flagged mines count
     @Test
     public void testDefaultFalseWinStateFlaggedMinesCount(){
@@ -131,7 +140,16 @@ public class GameModelTest {
         assertEquals(INTERMEDIATE_MINES - 1, flaggedMines);
     }
 
-    //test default false win state with flagged count
+    //test the expert false win state with flagged mines count
+    @Test
+    public void testExpertFalseWinStateFlaggedMinesCount(){
+        setExpertBoard();
+        setFalseWinState();
+        int flaggedMines = gameModel.getMinesFlaggedCount();
+        assertEquals(EXPERT_MINES - 1, flaggedMines);
+    }
+
+    //test default false win state with flag count
     @Test
     public void testDefaultFalseWinStateFlagCount(){
         setDefaultBoard();
@@ -140,13 +158,22 @@ public class GameModelTest {
         assertEquals(BEGINNER_MINES, flags);
     }
 
-    //test the intermediate false win state with flagged count
+    //test the intermediate false win state with flagg count
     @Test
-    public void testIntermediateWinStateFlagCount(){
+    public void testIntermediateFalseWinStateFlagCount(){
         setIntermediateBoard();
         setFalseWinState();
         int flags = gameModel.getFlaggedCount();
         assertEquals(INTERMEDIATE_MINES, flags);
+    }
+
+    //test the expert false win state with flag count
+    @Test
+    public void testExpertFalseWinStateFlagCount(){
+        setExpertBoard();
+        setFalseWinState();
+        int flags = gameModel.getFlaggedCount();
+        assertEquals(EXPERT_MINES, flags);
     }
 
     //test the default win state with the boolean flag
@@ -160,8 +187,17 @@ public class GameModelTest {
 
     //test the intermediate win state with the boolean flag
     @Test
-    public void tesIntermediateWinStateBooleanFlag(){
+    public void testIntermediateWinStateBooleanFlag(){
         setIntermediateBoard();
+        setWinState();
+        boolean won = gameModel.isGameWon();
+        assertTrue(won);
+    }
+
+    //test the expert win state with the boolean flag
+    @Test
+    public void testExpertWinStateBooleanFlag(){
+        setExpertBoard();
         setWinState();
         boolean won = gameModel.isGameWon();
         assertTrue(won);
@@ -176,9 +212,19 @@ public class GameModelTest {
         assertFalse(won);
     }
 
+    //test the intermediate false win state with the boolean flag
     @Test
-    public void testIntermediateWinStateBooleanFlag(){
+    public void testIntermediateFalseWinStateBooleanFlag(){
         setIntermediateBoard();
+        setFalseWinState();
+        boolean won = gameModel.isGameWon();
+        assertFalse(won);
+    }
+
+    //test the expert false win state with the boolean flag
+    @Test
+    public void testExpertFalseWinStateBooleanFlag(){
+        setExpertBoard();
         setFalseWinState();
         boolean won = gameModel.isGameWon();
         assertFalse(won);
