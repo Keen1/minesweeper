@@ -3,7 +3,7 @@ package models;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GameModelTest {
     private static GameModel gameModel;
@@ -94,7 +94,7 @@ public class GameModelTest {
         int mineCount = gameModel.getMineCount();
         assertEquals(EXPERT_MINES, mineCount);
     }
-
+    //test the default win state with flagged mines count
     @Test
     public void testDefaultWinStateFlaggedMinesCount(){
         setDefaultBoard();
@@ -104,6 +104,7 @@ public class GameModelTest {
 
     }
 
+    //test the default false win state with the flagged mines count
     @Test
     public void testDefaultFalseWinStateFlaggedMinesCount(){
         setDefaultBoard();
@@ -112,6 +113,7 @@ public class GameModelTest {
         assertEquals(BEGINNER_MINES - 1, flaggedMines);
     }
 
+    //test default false win state with flagged count
     @Test
     public void testDefaultFalseWinStateFlagCount(){
         setDefaultBoard();
@@ -119,6 +121,23 @@ public class GameModelTest {
         int flags = gameModel.getFlaggedCount();
         System.out.printf("flags : %d", flags);
         assertEquals(BEGINNER_MINES, flags);
+    }
+
+    //test the default win state with the boolean flag
+    @Test
+    public void testDefaultWinStateBooleanFlag(){
+        setDefaultBoard();
+        setWinState();
+        boolean won = gameModel.isGameWon();
+        assertTrue(won);
+    }
+
+    @Test
+    public void testDefaultFalseWinStateBooleanFlag(){
+        setDefaultBoard();
+        setFalseWinState();
+        boolean won = gameModel.isGameWon();
+        assertFalse(won);
     }
 
 
