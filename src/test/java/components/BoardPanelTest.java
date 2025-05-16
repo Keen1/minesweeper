@@ -110,6 +110,7 @@ public class BoardPanelTest {
     //test that the timer is stopped after the user clicks a mine on the default board
     @Test
     public void testMineClickTimerDisabledOnDefaultBoard(){
+        resetFrame();
 
         gameFrame.getBeginnerDifficultyMenuItem().doClick();
         clickMine();
@@ -137,6 +138,7 @@ public class BoardPanelTest {
     //test that the timer is stopped after the user clicks a mine on the intermediate board
     @Test
     public void testMineClickTimerDisabledOnIntermediateBoard(){
+        resetFrame();
         gameFrame.getIntermediateDifficultyMenuItem().doClick();
         clickMine();
         assertFalse(gameFrame.getScoreBoardPanel().getTimer().isRunning());
@@ -206,6 +208,52 @@ public class BoardPanelTest {
         assertFalse(gameFrame.getBoardPanel().getCellButton(row, col).isUserFlagged());
     }
 
+    //test setting user flag on intermediate board
+    @Test
+    public void testUserFlagOnIntermediateBoard(){
+        gameFrame.getIntermediateDifficultyMenuItem().doClick();
+        int[] coords = setFlag();
+        int row = coords[0];
+        int col = coords[1];
+
+        assertTrue(gameFrame.getBoardPanel().getCellButton(row, col).isUserFlagged());
+    }
+
+    //test removing a user flag on intermediate board
+    @Test
+    public void testRemovingUserFlagOnIntermediateBoard(){
+        gameFrame.getIntermediateDifficultyMenuItem().doClick();
+        int[] coords = setFlag();
+        int row = coords[0];
+        int col = coords[1];
+
+        removeFlag(row, col);
+        assertFalse(gameFrame.getBoardPanel().getCellButton(row, col).isUserFlagged());
+    }
+
+    //test setting user flag on expert board
+    @Test
+    public void testUserFlagOnExpertBoard(){
+        gameFrame.getExpertDifficultyMenuItem().doClick();
+        int[] coords = setFlag();
+        int row = coords[0];
+        int col = coords[1];
+
+        assertTrue(gameFrame.getBoardPanel().getCellButton(row, col).isUserFlagged());
+    }
+
+    //test removing user flag on expert board
+    @Test
+    public void testRemovingUserFlagOnExpertBoard(){
+        gameFrame.getExpertDifficultyMenuItem().doClick();
+        int[] coords = setFlag();
+        int row = coords[0];
+        int col = coords[1];
+
+        removeFlag(row, col);
+
+        assertFalse(gameFrame.getBoardPanel().getCellButton(row, col).isUserFlagged());
+    }
 
 
     public void removeFlag(int row, int col){
@@ -243,6 +291,10 @@ public class BoardPanelTest {
         return gameFrame.getBoardPanel().getCellButton(randomRow, randomColumn);
 
 
+    }
+
+    public void resetFrame(){
+        gameFrame = new GameFrame();
     }
 
 
