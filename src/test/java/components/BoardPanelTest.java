@@ -2,6 +2,7 @@ package components;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BoardPanelTest {
@@ -95,5 +96,89 @@ public class BoardPanelTest {
         gameFrame.getExpertDifficultyMenuItem().doClick();
         int mineCount = gameFrame.getGameController().getBoardPanelMineCount();
         assertEquals(EXPERT_MINE_COUNT, mineCount);
+    }
+
+    /*
+    * test the user clicking a mine on the default board
+    */
+
+    //test that the timer is stopped after the user clicks a mine on the default board
+    @Test
+    public void testMineClickTimerDisabledOnDefaultBoard(){
+
+        gameFrame.getBeginnerDifficultyMenuItem().doClick();
+        clickMine();
+
+        assertFalse(gameFrame.getScoreBoardPanel().getTimer().isRunning());
+
+    }
+
+    //test that the glass panel is enabled after the user clicks a mine on the default board
+    @Test
+    public void testMineClickGlassPanelEnabledOnDefaultBoard(){
+
+        gameFrame.getBeginnerDifficultyMenuItem().doClick();
+        clickMine();
+
+        assertTrue(gameFrame.getBoardPanel().getGlassPanel().isEnabled());
+
+
+    }
+
+    /*
+    * test the user clicking a mine on the intermediate board
+    */
+
+    //test that the timer is stopped after the user clicks a mine on the intermediate board
+    @Test
+    public void testMineClickTimerDisabledOnIntermediateBoard(){
+        gameFrame.getIntermediateDifficultyMenuItem().doClick();
+        clickMine();
+        assertFalse(gameFrame.getScoreBoardPanel().getTimer().isRunning());
+    }
+
+    //test that the glass panel is enabled after the user clicks a mine on the intermediate board
+    @Test
+    public void testMineClickGlassPanelEnabledOnIntermediateBoard(){
+        gameFrame.getIntermediateDifficultyMenuItem().doClick();
+        clickMine();
+        assertTrue(gameFrame.getBoardPanel().getGlassPanel().isEnabled());
+    }
+
+    /*
+    * test the user clicking a mine on the expert board
+    * */
+
+    //test that the timer is stopped after the user clicks a mine on the expert board
+    @Test
+    public void testMineClickTimerDisabledOnExpertBoard(){
+
+        gameFrame.getExpertDifficultyMenuItem().doClick();
+        clickMine();
+
+        assertFalse(gameFrame.getScoreBoardPanel().getTimer().isRunning());
+    }
+
+    //test that the glass panel is enabled after the user clicks a mine on the expert board
+    @Test
+    public void testMineClickGlassPanelEnabledOnExpertBoard(){
+
+        gameFrame.getExpertDifficultyMenuItem().doClick();
+        clickMine();
+
+        assertTrue(gameFrame.getBoardPanel().getGlassPanel().isEnabled());
+    }
+
+
+
+    public void clickMine(){
+        for(int i = 0; i < gameFrame.getGameModel().getBoard().getCells().length; i++){
+            for(int j = 0; j < gameFrame.getGameModel().getBoard().getCells()[i].length; j++){
+                if(gameFrame.getGameModel().getBoard().getCell(i,j).hasMine()){
+                    gameFrame.getBoardPanel().getCellButton(i,j).doClick();
+                    break;
+                }
+            }
+        }
     }
 }
