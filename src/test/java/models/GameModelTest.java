@@ -17,12 +17,12 @@ public class GameModelTest {
     private static final int EXPERT_MINES = 99;
 
 
-
+    //instantiate the game model before running any tests
     @BeforeAll
     public static void setup(){
         gameModel = new GameModel();
     }
-
+    //test the default row count
     @Test
     public void testDefaultRows(){
         setDefaultBoard();
@@ -31,6 +31,7 @@ public class GameModelTest {
 
     }
 
+    //test the default column count
     @Test
     public void testDefaultColumns(){
         setDefaultBoard();
@@ -38,6 +39,7 @@ public class GameModelTest {
         assertEquals(BEGINNER_ROWS_COLUMNS, columns);
     }
 
+    //test the default mine count
     @Test
     public void testDefaultMineCount(){
         setDefaultBoard();
@@ -45,6 +47,7 @@ public class GameModelTest {
         assertEquals(BEGINNER_MINES, mineCount);
     }
 
+    //test the intermediate row count
     @Test
     public void testIntermediateRows(){
         setIntermediateBoard();
@@ -52,6 +55,7 @@ public class GameModelTest {
         assertEquals(INTERMEDIATE_ROWS_COLUMNS, rows);
     }
 
+    //test the intermediate column count
     @Test
     public void testIntermediateColumns(){
         setIntermediateBoard();
@@ -59,6 +63,7 @@ public class GameModelTest {
         assertEquals(INTERMEDIATE_ROWS_COLUMNS, columns);
     }
 
+    //test the intermediate mine count
     @Test
     public void testIntermediateMineCount(){
         setIntermediateBoard();
@@ -66,6 +71,7 @@ public class GameModelTest {
         assertEquals(INTERMEDIATE_MINES, mineCount);
     }
 
+    //test the expert row count
     @Test
     public void testExpertRows(){
         setExpertBoard();
@@ -73,6 +79,7 @@ public class GameModelTest {
         assertEquals(EXPERT_ROWS, rows);
     }
 
+    //test the expert column count
     @Test
     public void testExpertColumns(){
         setExpertBoard();
@@ -80,6 +87,7 @@ public class GameModelTest {
         assertEquals(EXPERT_COLUMNS, columns);
     }
 
+    //test the expert mine count
     @Test
     public void testExpertMineCount(){
         setExpertBoard();
@@ -87,7 +95,71 @@ public class GameModelTest {
         assertEquals(EXPERT_MINES, mineCount);
     }
 
+    @Test
+    public void testDefaultWinStateFlaggedMinesCount(){
+        setDefaultBoard();
+        setWinState();
+        int flaggedMines = gameModel.getMinesFlaggedCount();
+        assertEquals(BEGINNER_MINES, flaggedMines);
 
+    }
+
+    @Test
+    public void testDefaultFalseWinStateFlaggedMinesCount(){
+        setDefaultBoard();
+        setFalseWinState();
+        int flaggedMines = gameModel.getMinesFlaggedCount();
+        assertEquals(BEGINNER_MINES - 1, flaggedMines);
+    }
+
+    @Test
+    public void testDefaultFalseWinStateFlagCount(){
+        setDefaultBoard();
+        setFalseWinState();
+        int flags = gameModel.getFlaggedCount();
+        System.out.printf("flags : %d", flags);
+        assertEquals(BEGINNER_MINES, flags);
+    }
+
+
+    public void setWinState(){
+        for(int i = 0; i < gameModel.getBoardModelRows(); i++){
+            for(int j = 0; j < gameModel.getBoardModelColumns(); j++){
+                if(gameModel.getBoard().getCell(i,j).hasMine()){
+                    gameModel.getBoard().getCell(i,j).setUserFlag(true);
+                }
+            }
+        }
+    }
+
+    public void setFalseWinState(){
+        int minesFound = 0;
+        int falseFlag = 0;
+
+        for(int i = 0; i < gameModel.getBoardModelRows(); i++){
+
+            if(minesFound == gameModel.getMineCount() - 1)
+                break;
+
+            for(int j = 0; j < gameModel.getBoardModelColumns(); j++){
+
+                if(minesFound == gameModel.getMineCount() - 1)
+                    break;
+
+                if(gameModel.getBoard().getCell(i, j).hasMine()){
+                    gameModel.getBoard().getCell(i,j).setUserFlag(true);
+                    minesFound++;
+                }
+
+                //set a false flag to test a false win state
+                if(!gameModel.getBoard().getCell(i,j).hasMine() && falseFlag < 1){
+                    gameModel.getBoard().getCell(i,j).setUserFlag(true);
+                    falseFlag++;
+                }
+
+            }
+        }
+    }
     public void setDefaultBoard(){
         gameModel.resetBoard(BEGINNER_ROWS_COLUMNS, BEGINNER_ROWS_COLUMNS, BEGINNER_MINES);
     }
