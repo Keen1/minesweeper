@@ -2,6 +2,11 @@ package components;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import java.awt.event.InputEvent;
+import java.awt.event.MouseEvent;
+import java.security.SecureRandom;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -167,6 +172,55 @@ public class BoardPanelTest {
         clickMine();
 
         assertTrue(gameFrame.getBoardPanel().getGlassPanel().isEnabled());
+    }
+
+    /*
+    * test setting flags on the gui sets them on the model
+    */
+    @Test
+    public void testUserFlagSetOnDefaultBoard(){
+
+        gameFrame.getBeginnerDifficultyMenuItem().doClick();
+        int[] coords = setFlag();
+
+        int row = coords[0];
+        int col = coords[1];
+
+        assertTrue(gameFrame.getBoardPanel().getCellButton(row, col).isUserFlagged());
+
+
+    }
+
+    public int[] setFlag(){
+        CellButton button = getRandomCellButton();
+        int[] coords = new int[2];
+        coords[0] = button.getRow();
+        coords[1] = button.getColumn();
+        simulateRightClick(button);
+        return coords;
+    }
+
+    public void simulateRightClick(CellButton button){
+
+        int modifier = InputEvent.BUTTON3_DOWN_MASK;
+        MouseEvent event = new MouseEvent(button, MouseEvent.MOUSE_RELEASED, System.currentTimeMillis(), modifier,
+                button.getWidth() / 2, button.getHeight() / 2, 1, false, MouseEvent.BUTTON3);
+
+        button.dispatchEvent(event);
+    }
+
+    public CellButton getRandomCellButton(){
+
+        int rows = gameFrame.getBoardPanel().getBoardRows();
+        int columns = gameFrame.getBoardPanel().getBoardColumns();
+
+        SecureRandom secureRand = new SecureRandom();
+        int randomRow = secureRand.nextInt(rows);
+        int randomColumn = secureRand.nextInt(columns);
+
+        return gameFrame.getBoardPanel().getCellButton(randomRow, randomColumn);
+
+
     }
 
 
