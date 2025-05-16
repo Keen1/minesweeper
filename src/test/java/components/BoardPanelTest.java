@@ -175,8 +175,10 @@ public class BoardPanelTest {
     }
 
     /*
-    * test setting flags on the gui sets them on the model
+    * test setting flags on the gui sets them on the board
     */
+
+    //test setting a flag on the default board
     @Test
     public void testUserFlagSetOnDefaultBoard(){
 
@@ -189,6 +191,26 @@ public class BoardPanelTest {
         assertTrue(gameFrame.getBoardPanel().getCellButton(row, col).isUserFlagged());
 
 
+    }
+
+    //test removing a user flag on the default board
+    @Test
+    public void testRemovingUserFlagOnDefaultBoard(){
+
+        gameFrame.getBeginnerDifficultyMenuItem().doClick();
+        int[] coords = setFlag();
+        int row = coords[0];
+        int col = coords[1];
+        removeFlag(row, col);
+
+        assertFalse(gameFrame.getBoardPanel().getCellButton(row, col).isUserFlagged());
+    }
+
+
+
+    public void removeFlag(int row, int col){
+        CellButton button = gameFrame.getBoardPanel().getCellButton(row, col);
+        simulateRightClick(button);
     }
 
     public int[] setFlag(){
