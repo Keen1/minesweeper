@@ -130,6 +130,7 @@ public class GameModelTest {
                 }
             }
         }
+        updateModel();
     }
 
     public void setFalseWinState(){
@@ -159,6 +160,12 @@ public class GameModelTest {
 
             }
         }
+        updateModel();
+    }
+
+    public void updateModel(){
+        gameModel.updateFlaggedCount();
+        gameModel.updateMinesFlaggedCount();
     }
     public void setDefaultBoard(){
         gameModel.resetBoard(BEGINNER_ROWS_COLUMNS, BEGINNER_ROWS_COLUMNS, BEGINNER_MINES);
