@@ -104,6 +104,15 @@ public class GameModelTest {
 
     }
 
+    //test the intermediate win state with flagged mines count
+    @Test
+    public void testIntermediateWinStateFlaggedMinesCount(){
+        setIntermediateBoard();
+        setWinState();
+        int flaggedMines = gameModel.getMinesFlaggedCount();
+        assertEquals(INTERMEDIATE_MINES, flaggedMines);
+    }
+
     //test the default false win state with the flagged mines count
     @Test
     public void testDefaultFalseWinStateFlaggedMinesCount(){
@@ -113,14 +122,31 @@ public class GameModelTest {
         assertEquals(BEGINNER_MINES - 1, flaggedMines);
     }
 
+    //test the intermediate false win state with flagged mines count
+    @Test
+    public void testIntermediateFalseWinStateFlaggedMinesCount(){
+        setIntermediateBoard();
+        setFalseWinState();
+        int flaggedMines = gameModel.getMinesFlaggedCount();
+        assertEquals(INTERMEDIATE_MINES - 1, flaggedMines);
+    }
+
     //test default false win state with flagged count
     @Test
     public void testDefaultFalseWinStateFlagCount(){
         setDefaultBoard();
         setFalseWinState();
         int flags = gameModel.getFlaggedCount();
-        System.out.printf("flags : %d", flags);
         assertEquals(BEGINNER_MINES, flags);
+    }
+
+    //test the intermediate false win state with flagged count
+    @Test
+    public void testIntermediateWinStateFlagCount(){
+        setIntermediateBoard();
+        setFalseWinState();
+        int flags = gameModel.getFlaggedCount();
+        assertEquals(INTERMEDIATE_MINES, flags);
     }
 
     //test the default win state with the boolean flag
@@ -132,6 +158,16 @@ public class GameModelTest {
         assertTrue(won);
     }
 
+    //test the intermediate win state with the boolean flag
+    @Test
+    public void tesIntermediateWinStateBooleanFlag(){
+        setIntermediateBoard();
+        setWinState();
+        boolean won = gameModel.isGameWon();
+        assertTrue(won);
+    }
+
+    //test the default false win state with the boolean flag
     @Test
     public void testDefaultFalseWinStateBooleanFlag(){
         setDefaultBoard();
@@ -139,6 +175,16 @@ public class GameModelTest {
         boolean won = gameModel.isGameWon();
         assertFalse(won);
     }
+
+    @Test
+    public void testIntermediateWinStateBooleanFlag(){
+        setIntermediateBoard();
+        setFalseWinState();
+        boolean won = gameModel.isGameWon();
+        assertFalse(won);
+    }
+
+
 
 
     public void setWinState(){
