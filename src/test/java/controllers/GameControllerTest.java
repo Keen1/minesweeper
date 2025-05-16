@@ -12,4 +12,10 @@ public class GameControllerTest {
     }
 
 
+
+    public void resetFrame(){
+        gameFrame = new GameFrame();
+    }
+
+
 }

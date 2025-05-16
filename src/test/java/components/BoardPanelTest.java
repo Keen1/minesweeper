@@ -105,6 +105,7 @@ public class BoardPanelTest {
 
     /*
     * test the user clicking a mine on the default board
+    * TODO: anything that is testing the timer needs to be moved to a ScoreBoardPanelTest class
     */
 
     //test that the timer is stopped after the user clicks a mine on the default board

@@ -274,6 +274,8 @@ public class GameModelTest {
         updateModel();
     }
 
+
+
     public void updateModel(){
         gameModel.updateFlaggedCount();
         gameModel.updateMinesFlaggedCount();
