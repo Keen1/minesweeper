@@ -1,5 +1,7 @@
 plugins {
-    id 'java'
+    id 'application'
+
+
 }
 
 group = 'app.keendev'
@@ -16,4 +18,14 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+application{
+    mainClass = 'drivers.Driver'
+}
+
+jar{
+    manifest{
+        attributes 'Main-Class' : 'drivers.Driver'
+    }
 }
