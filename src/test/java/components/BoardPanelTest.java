@@ -256,6 +256,21 @@ public class BoardPanelTest {
         assertFalse(gameFrame.getBoardPanel().getCellButton(row, col).isUserFlagged());
     }
 
+    //test that each cell that has adjacent mines has a non-null image path
+    @Test
+    public void testAdjacentMineImagePaths(){
+
+        for(int i = 0; i < gameFrame.getBoardPanel().getCellButtons().length; i++){
+            for(int j = 0; j < gameFrame.getBoardPanel().getCellButtons()[i].length; j++){
+
+                if(gameFrame.getGameModel().getAdjacentMinesCount(i,j) > 0){
+
+                    assertNotNull(gameFrame.getBoardPanel().getCellButton(i, j).getImagePathString());
+                }
+            }
+        }
+    }
+
 
     public void removeFlag(int row, int col){
         CellButton button = gameFrame.getBoardPanel().getCellButton(row, col);
