@@ -23,10 +23,35 @@ test {
 
 application{
     mainClass = 'drivers.Driver'
+    mainModule = 'minesweeper.main'
+    applicationDefaultJvmArgs = ['--add-opens', 'java.desktop/sun.awt.X11=minesweeper.main']
+
 }
 
 jar{
     manifest{
         attributes 'Main-Class' : 'drivers.Driver'
+    }
+}
+
+jlink{
+    launcher{
+        name = 'minesweeper'
+
+        jvmArgs = ['--adds-opens', 'java.desktop/sun.awt.X11=minesweeper.main']
+    }
+
+    jpackage {
+        installerType = 'deb'
+        imageName = "minesweeper"
+        installerName = "minesweeper"
+        appVersion = "1.0"
+        outputDir = "jpackage"
+        icon = file('src/main/resources/logo/logo.png')
+
+        installerOptions = [ '--linux-shortcut']
+
+        jvmArgs = ['--add-opens', 'java.desktop/sun.awt.X11=minesweeper.main']
+
     }
 }
