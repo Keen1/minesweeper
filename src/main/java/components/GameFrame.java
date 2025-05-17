@@ -4,8 +4,13 @@ import controllers.GameController;
 import handlers.difficulty.DifficultyHandler;
 import models.GameModel;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.net.URL;
+import java.util.Objects;
+
 /*
 * game frame class
 * contains all the panels and instantiates the game controller
@@ -54,6 +59,8 @@ public class GameFrame extends JFrame {
         add(getBoardPanel(), BorderLayout.CENTER);
         setJMenuBar(getMenus());
         pack();
+        setFrameIcon();
+
     }
 
 
@@ -247,6 +254,21 @@ public class GameFrame extends JFrame {
 
         return this.menuBar;
 
+    }
+
+    private void setFrameIcon(){
+        URL url = getClass().getResource("/logo/logo.png");
+        Image logo = null;
+        try{
+            logo = ImageIO.read(Objects.requireNonNull(url));
+
+        }catch(IOException e){
+            System.out.printf("error setting program icon image: %s\n", e.getMessage());
+        }
+
+        if(logo != null){
+            setIconImage(logo);
+        }
     }
 
     //init the scoreboard panel
